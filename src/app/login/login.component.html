@@ -1,0 +1,46 @@
+<div class="block-section">
+  <div class="block-header">
+    <span class="block-title"><span class="text-900">DataGovernance</span></span>
+    <div class="block-actions text-900"><a tabindex="0" class="block-action-active"></a><a class="block-action-disabled"></a></div>
+  </div>
+  <div class="block-content" style="margin-top: 50px;">
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="flex">
+        <div class="surface-section w-full md:w-6 p-6 md:p-8">
+          <div class="mb-5">
+            <img src="assets/images/blocks/logos/hyper.svg" alt="Image" height="50" class="mb-3">
+            <div class="text-900 text-3xl font-medium mb-3">Welcome Back</div>
+            <span class="text-600 font-medium mr-2">Don't have an account?</span>
+            <a class="font-medium no-underline text-blue-500 cursor-pointer" routerLink="/signUp">Create today!</a>
+          </div>
+          <label for="email" class="block text-900 font-medium mb-2">Email</label>
+          <input id="email" type="text" formControlName="email" placeholder="Email address" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3" />
+          <div *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched" class="text-danger">Email is required</div>
+          <div *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched" class="text-danger">Invalid email format</div>
+          <label for="password" class="block text-900 font-medium mb-2">Password</label>
+          <input id="password" type="password" formControlName="password" placeholder="Password" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3" />
+          <div *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched" class="text-danger">Password is required</div>
+          <div *ngIf="loginForm.get('password')?.errors?.['minlength']" class="text-danger">Password must be at least 9 characters long</div>
+          <div class="flex align-items-center justify-content-between mb-6">
+            <div class="flex align-items-center">
+              <p-checkbox id="rememberme" styleclass="mr-2" class="p-element">
+                <div class="mr-4 p-checkbox p-component">
+                  <div class="p-hidden-accessible">
+                    <input type="checkbox" value="undefined" aria-checked="false" />
+                  </div>
+                  <div class="p-checkbox-box"></div>
+                </div>
+              </p-checkbox>
+              <label for="rememberme">Remember me</label>
+            </div>
+            <a class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150">Forgot password?</a>
+          </div>
+          <button icon="pi pi-user" type="submit" pbutton="" pripple="" label="Log In" class="p-element p-ripple w-full py-3 font-medium p-button p-component">
+            <span class="p-button-label">Log In</span><span class="p-ink"></span>
+          </button>
+        </div>
+        <div class="hidden md:block w-6 bg-no-repeat bg-cover" style="background-image: url('https://blocks.primeng.org/assets/images/blocks/signin/signin.jpg');"></div>
+      </div>
+    </form>
+  </div>
+</div>
