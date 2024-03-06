@@ -61,5 +61,41 @@ export class DataTableListComponent implements OnInit {
     this.router.navigate(['/schemas', dataTable.idTable]);
   }
 
- 
+  // In your component class
+  mappingObject = {
+    'union|membership|labor|labor|rights': 'GDPR:Trade union',
+    'race|ethnicity|nationality|ancestry|background': 'GDPR:race/ethnic',
+    'health|condition|illness|disease|diagnosis|treatment|prescription': 'Medical information',
+    'fingerprint|dna|voiceprint|scan': 'Biometric information',
+    'income|assets|debts|bank|credit|investment|card': 'Financial information',
+    'dna|genome|genetic|genealogy|inherited|traits|predisposition': 'Genetic information',
+    'ideology|political|party|voting|affiliation': 'Political opinions',
+    'religion|faith|belief|religious|worship': 'Religious beliefs',
+    'lgbtq+|sexual|gender|queer|trans': 'Sexual orientation',
+    'child|minor|youth|underage|guardian|kids': 'About children',
+  };
+
+  getTagsForDataTable(dataTable: DataTable): string[] {
+    let tags: string[] = [];
+    for (const pattern in this.mappingObject) {
+      const words = pattern.split('|');
+      const found = words.some(word => dataTable.name.toLowerCase().includes(word));
+      if (found) {
+        tags.push((this.mappingObject as any)[pattern]);
+      }
+    }
+    return tags;
+  }
+
+  getTagsForSchema(schema: Schema): string[] {
+    let tags: string[] = [];
+    for (const pattern in this.mappingObject) {
+      const words = pattern.split('|');
+      const found = words.some(word => schema.name.toLowerCase().includes(word));
+      if (found) {
+        tags.push((this.mappingObject as any)[pattern]);
+      }
+    }
+    return tags;
+  }
 }

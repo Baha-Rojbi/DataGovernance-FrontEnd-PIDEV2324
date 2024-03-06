@@ -14,23 +14,24 @@
         <span class="tag">Source: {{ dataTable.source }}</span>
         <span class="tag">Creation Date: {{ dataTable.creationDate }}</span>
         <span class="tag">Size: {{ dataTable.size }}</span>
+        <!-- Display "Sensitive" tag if sensitive information is found in dataTable.name -->
+        <span *ngIf="getTagsForDataTable(dataTable).includes('Sensitive')" class="tag">Sensitive</span>
       </div>
     </div>
   </div>
   <!-- Details Panel -->
   <!-- Inside the details panel -->
-<div class="details-panel" *ngIf="selectedDataTable">
-  <h2>{{ selectedDataTable.name }}</h2>
-  <h3>Columns: {{ selectedSchemas.length }}</h3>
-  <p><span class="description-title">Description:</span> {{ selectedDataTable.description }}</p>
-  <h4>Schema</h4>
-  <div *ngFor="let schema of selectedSchemas" class="schema-container">
-    <p><strong>{{ schema.name }}</strong> ({{ schema.type }})</p>
-    <p>{{ schema.description }}</p>
-    <div *ngFor="let tag of schema.tags">
-      <span class="tag">{{ tag }}</span>
+  <div class="details-panel" *ngIf="selectedDataTable">
+    <h2>{{ selectedDataTable.name }}</h2>
+    <h3>Columns: {{ selectedSchemas.length }}</h3>
+    <p><span class="description-title">Description:</span> {{ selectedDataTable.description }}</p>
+    <h4>Schema</h4>
+    <div *ngFor="let schema of selectedSchemas" class="schema-container">
+      <p><strong>{{ schema.name }}</strong> ({{ schema.type }})</p>
+      <p>{{ schema.description }}</p>
+      <div *ngFor="let tag of getTagsForSchema(schema)">
+        <span class="tag">{{ tag }}</span>
+      </div>
     </div>
   </div>
-</div>
-
 </div>
