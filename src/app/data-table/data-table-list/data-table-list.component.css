@@ -1,0 +1,121 @@
+.card-container {
+  margin-left: 20px; /* Adjust as needed */
+  margin-right: 20px; /* Adjust as needed */
+  width: calc(100% - 40px); /* Adjust width based on the margins */
+  background-color: white;
+  font-family: Arial, sans-serif; /* Replace with your preferred font */
+  box-sizing: border-box;
+}
+
+.card {
+  border-left: 5px solid transparent; /* Thicker border, adjust as needed */
+  padding: 1rem;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  background-color: #f0f0f0; /* Grey background on hover */
+  border-left-color: blue; /* Blue line on the left side */
+  box-shadow: none; /* No shadow on hover */
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.database-info {
+  display: flex;
+  align-items: center;
+}
+
+.table-name {
+  color: rgb(29, 127, 219);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card-body p {
+  color: black;
+  margin: 0;
+}
+
+.card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eaeaea; /* Light border for footer separation */
+}
+
+.tag {
+  color: black;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) {
+  .card-container {
+    margin-left: 10px; /* Adjust as needed for smaller screens */
+    margin-right: 10px; /* Adjust as needed for smaller screens */
+    width: calc(100% - 20px); /* Adjust width based on the margins */
+  }
+
+  .card {
+    margin-bottom: 1rem; /* Space between cards on smaller screens */
+  }
+
+  .card-footer {
+    justify-content: space-between;
+  }
+}
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-container {
+  flex-grow: 1;
+}
+
+.card {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.card-header, .card-body, .card-footer {
+  padding: 10px;
+}
+
+.table-name {
+  cursor: pointer;
+}
+
+.details-panel {
+  width: 300px;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+}
+
+.details-panel h2 {
+  color: blue;
+}
+
+.details-panel h3, .details-panel h4, .description-title {
+  color: grey;
+}
+
+.schema-container {
+  background-color: #f0f0f0;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.tag {
+  background-color: #e7e7e7;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 5px;
+  display: inline-block;
+}

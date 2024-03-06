@@ -1,0 +1,36 @@
+<div class="main-container">
+  <div class="card-container">
+    <div *ngFor="let dataTable of dataTables" class="card" (dblclick)="openEditForm(dataTable)" (click)="selectDataTable(dataTable)">
+      <div class="card-header">
+        <div class="database-info">
+          <div class="table-name" (click)="openSchemas(dataTable); $event.stopPropagation()">{{ dataTable.name }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>{{ dataTable.description }}</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">Owner: {{ dataTable.creator }}</span>
+        <span class="tag">Source: {{ dataTable.source }}</span>
+        <span class="tag">Creation Date: {{ dataTable.creationDate }}</span>
+        <span class="tag">Size: {{ dataTable.size }}</span>
+      </div>
+    </div>
+  </div>
+  <!-- Details Panel -->
+  <!-- Inside the details panel -->
+<div class="details-panel" *ngIf="selectedDataTable">
+  <h2>{{ selectedDataTable.name }}</h2>
+  <h3>Columns: {{ selectedSchemas.length }}</h3>
+  <p><span class="description-title">Description:</span> {{ selectedDataTable.description }}</p>
+  <h4>Schema</h4>
+  <div *ngFor="let schema of selectedSchemas" class="schema-container">
+    <p><strong>{{ schema.name }}</strong> ({{ schema.type }})</p>
+    <p>{{ schema.description }}</p>
+    <div *ngFor="let tag of schema.tags">
+      <span class="tag">{{ tag }}</span>
+    </div>
+  </div>
+</div>
+
+</div>

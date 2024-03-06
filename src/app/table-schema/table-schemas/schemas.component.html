@@ -1,0 +1,39 @@
+<!-- Include Angular Material icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<table class="schemas-table">
+    <thead>
+      <tr>
+        <th>NAME</th>
+        <th>TYPE</th>
+        <th>DESCRIPTION</th>
+        <th>TAGS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let schema of schemas; let idx = index">
+        <td>{{ schema.name }}</td>
+        <td>{{ schema.type }}</td>
+        <td>
+          <div class="description-cell">
+            {{ schema.description }}
+            <i class="material-icons edit-icon" (click)="openEditDialog(schema)">edit</i>
+          </div>
+        </td>
+        <td (mouseover)="showEditIcon[idx] = true" (mouseleave)="showEditIcon[idx] = false">
+          <ng-container *ngFor="let tag of schema.tags; let i = index">
+            <span class="tag">
+              {{ tag }}
+              <i *ngIf="showEditIcon[idx]" class="material-icons" (click)="removeTag(schema, i)">close</i>
+            </span>
+          </ng-container>
+          <i *ngIf="showEditIcon[idx]" class="material-icons" (click)="editMode[idx] = true; showEditIcon[idx] = false">edit</i>
+          <div *ngIf="editMode[idx]">
+            <input [(ngModel)]="newTag" placeholder="Add tag" (keyup.enter)="addTag(schema, idx)">
+            <button (click)="addTag(schema, idx)">Confirm</button>
+            <button (click)="editMode[idx] = false">Cancel</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -1,0 +1,6 @@
+<div>
+    <input type="file" (change)="onFileSelected($event)" />
+    <input type="text" [(ngModel)]="description" placeholder="Enter file description" />
+    <button (click)="onUpload()">Upload</button>
+  </div>
+  

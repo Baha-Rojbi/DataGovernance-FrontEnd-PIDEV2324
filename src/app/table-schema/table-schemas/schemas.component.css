@@ -1,0 +1,51 @@
+/* SchemasComponent Styles */
+.schemas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .schemas-table th, .schemas-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .schemas-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .tag, .glossary-term {
+    display: inline-block;
+    background-color: #eef;
+    padding: 2px 8px;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+  
+ /* This style will position the description and the icon nicely */
+.description-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Initially hide the edit icon */
+.edit-icon {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+/* Show the edit icon when hovering over the tag */
+.tag:hover .edit-icon {
+  visibility: visible;
+  cursor: pointer;
+}
+
+/* When hovering over the description cell, show the edit icon */
+.description-cell:hover .edit-icon {
+  visibility: visible;
+  cursor: pointer;
+}
+
