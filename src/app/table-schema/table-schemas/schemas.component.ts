@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { UploadService } from '../../services/upload.service';
 import { Schema } from '../../models/data-table';
 import { EditSchemaDialogComponent } from '../edit-schema-dialog/edit-schema-dialog.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({

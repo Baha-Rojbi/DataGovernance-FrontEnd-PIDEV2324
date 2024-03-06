@@ -5,12 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import {  HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+
 import { DataTableListComponent } from './data-table/data-table-list/data-table-list.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,8 +20,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { EditDataTableDialogComponent } from './data-table/edit-data-table-dialog/edit-data-table-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 

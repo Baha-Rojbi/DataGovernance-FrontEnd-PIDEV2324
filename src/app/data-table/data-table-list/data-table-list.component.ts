@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+
 import { UploadService } from '../../services/upload.service';
 
 import { DataTable, Schema } from '../../models/data-table';
 import { EditDataTableDialogComponent } from '../edit-data-table-dialog/edit-data-table-dialog.component';
-import { FormControl } from '@angular/forms';
+
 import { map, startWith } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-table-list',
