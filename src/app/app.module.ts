@@ -19,6 +19,10 @@ import { EditSchemaDialogComponent } from './table-schema/edit-schema-dialog/edi
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { EditDataTableDialogComponent } from './data-table/edit-data-table-dialog/edit-data-table-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 
 
@@ -44,7 +48,11 @@ import { EditDataTableDialogComponent } from './data-table/edit-data-table-dialo
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule
+    
 
   ],
   providers: [

@@ -119,3 +119,23 @@
   margin-right: 5px;
   display: inline-block;
 }
+
+.search-container {
+  margin: 20px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.filter-container {
+  margin: 20px;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+

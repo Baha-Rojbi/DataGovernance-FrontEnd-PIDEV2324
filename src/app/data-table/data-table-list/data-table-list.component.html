@@ -1,6 +1,28 @@
 <div class="main-container">
   <div class="card-container">
-    <div *ngFor="let dataTable of dataTables" class="card" (dblclick)="openEditForm(dataTable)" (click)="selectDataTable(dataTable)">
+    <div class="search-container">
+      <input type="text" [(ngModel)]="searchQuery" (input)="filterDataTables()" placeholder="Search by table name or owner...">
+    </div>
+    <div class="filter-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Filter by Owner</mat-label>
+        <input type="text" placeholder="Search owner" matInput
+               [formControl]="ownerSearchControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectOwner($event)">
+          <mat-option *ngFor="let owner of filteredOwners | async" [value]="owner">
+            {{ owner.owner }} ({{ owner.count }})
+          </mat-option>
+        </mat-autocomplete>
+        <mat-chip-list>
+          <mat-chip *ngFor="let owner of selectedOwners" (removed)="removeOwner(owner)">
+            {{ owner.owner }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+    
+    <div *ngFor="let dataTable of filteredDataTables" class="card" (dblclick)="openEditForm(dataTable)" (click)="selectDataTable(dataTable)">
       <div class="card-header">
         <div class="database-info">
           <div class="table-name" (click)="openSchemas(dataTable); $event.stopPropagation()">{{ dataTable.name }}</div>
@@ -22,7 +44,12 @@
 <div class="details-panel" *ngIf="selectedDataTable">
   <h2>{{ selectedDataTable.name }}</h2>
   <h3>Columns: {{ selectedSchemas.length }}</h3>
-  <p><span class="description-title">Description:</span> {{ selectedDataTable.description }}</p>
+  <p><span class="description-title">Description:</span>
+    <br>   {{ selectedDataTable.description }}</p>
+    <h4>Tags</h4>
+    <div *ngFor="let tag of aggregatedTags" class="tag">
+      {{ tag }}
+    </div>
   <h4>Schema</h4>
   <div *ngFor="let schema of selectedSchemas" class="schema-container">
     <p><strong>{{ schema.name }}</strong> ({{ schema.type }})</p>
