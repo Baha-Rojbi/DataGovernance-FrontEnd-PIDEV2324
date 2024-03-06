@@ -5,6 +5,22 @@
     </div>
     <div class="filter-container">
       <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Filter by Schema</mat-label>
+        <input type="text" placeholder="Search schema" matInput
+               [formControl]="schemaSearchControl" [matAutocomplete]="autoSchema">
+        <mat-autocomplete #autoSchema="matAutocomplete" (optionSelected)="selectSchema($event)">
+          <mat-option *ngFor="let schema of filteredSchemas | async" [value]="schema">
+            {{ schema.name }}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-chip-listbox>
+          <mat-chip *ngFor="let schema of selectedSchemasFilter" (removed)="removeSchema(schema)">
+            {{ schema.name }}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-listbox>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Filter by Owner</mat-label>
         <input type="text" placeholder="Search owner" matInput
                [formControl]="ownerSearchControl" [matAutocomplete]="auto">
@@ -13,16 +29,16 @@
             {{ owner.owner }} ({{ owner.count }})
           </mat-option>
         </mat-autocomplete>
-        <mat-chip-list>
+        <mat-chip-listbox>
           <mat-chip *ngFor="let owner of selectedOwners" (removed)="removeOwner(owner)">
             {{ owner.owner }}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
-        </mat-chip-list>
+        </mat-chip-listbox>
       </mat-form-field>
     </div>
     
-    <div *ngFor="let dataTable of filteredDataTables" class="card" (dblclick)="openEditForm(dataTable)" (click)="selectDataTable(dataTable)">
+    <div *ngFor="let dataTable of filteredDataTables" class="card" [ngClass]="{'card-selected': selectedDataTable?.idTable === dataTable.idTable}" (dblclick)="openEditForm(dataTable)" (click)="selectDataTable(dataTable)">
       <div class="card-header">
         <div class="database-info">
           <div class="table-name" (click)="openSchemas(dataTable); $event.stopPropagation()">{{ dataTable.name }}</div>

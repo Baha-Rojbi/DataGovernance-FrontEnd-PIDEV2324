@@ -36,5 +36,7 @@ export class UploadService {
   updateTags(idSchema: number, tags: string[]): Observable<any> {
     return this.http.put(`${this.baseUrl}/schemas/${idSchema}/tags`, tags);
   }
+ 
+  
   
 }

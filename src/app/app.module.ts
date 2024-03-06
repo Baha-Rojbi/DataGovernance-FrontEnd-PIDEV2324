@@ -8,15 +8,11 @@ import {  HttpClientModule } from '@angular/common/http';
 
 import { DataTableListComponent } from './data-table/data-table-list/data-table-list.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-
-
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SchemasComponent } from './table-schema/table-schemas/schemas.component';
 import { EditSchemaDialogComponent } from './table-schema/edit-schema-dialog/edit-schema-dialog.component';
-import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { EditDataTableDialogComponent } from './data-table/edit-data-table-dialog/edit-data-table-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,7 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -38,7 +34,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EditDataTableDialogComponent,
     SchemasComponent,
     EditSchemaDialogComponent
-
   ],
   imports: [
     BrowserModule,
@@ -49,11 +44,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatChipsModule,
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatChipsModule
     
 
   ],

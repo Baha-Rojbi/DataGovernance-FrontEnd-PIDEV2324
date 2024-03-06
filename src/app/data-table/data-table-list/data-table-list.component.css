@@ -15,7 +15,7 @@
 
 .card:hover {
   background-color: #f0f0f0; /* Grey background on hover */
-  border-left-color: blue; /* Blue line on the left side */
+  border-left-color: rgb(0, 153, 255); /* Blue line on the left side */
   box-shadow: none; /* No shadow on hover */
 }
 
@@ -24,6 +24,11 @@
   align-items: center;
   margin-bottom: 1rem;
 }
+.card-selected {
+  border-left-color: rgb(0, 153, 255); /* Blue line for the selected card */
+  background-color: hsl(0, 9%, 96%);
+}
+
 
 .database-info {
   display: flex;
@@ -34,6 +39,7 @@
   color: rgb(29, 127, 219);
   font-weight: bold;
   cursor: pointer;
+  font-size: 1.4em;
 }
 
 .card-body p {
@@ -95,11 +101,11 @@
 .details-panel {
   width: 300px;
   padding: 20px;
-  border-left: 1px solid #ccc;
+  border-left: 1px solid #d4d4d4;
 }
 
 .details-panel h2 {
-  color: blue;
+  color: rgb(0, 153, 255);
 }
 
 .details-panel h3, .details-panel h4, .description-title {
