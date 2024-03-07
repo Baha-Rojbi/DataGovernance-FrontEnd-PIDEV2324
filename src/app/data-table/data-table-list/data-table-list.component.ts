@@ -13,8 +13,8 @@ import { EditDataTableDialogComponent } from '../edit-data-table-dialog/edit-dat
 })
 export class DataTableListComponent implements OnInit {
   dataTables: DataTable[] = [];
-  selectedDataTable: DataTable | null = null; 
-  selectedSchemas: Schema[] = []; 
+  selectedDataTable: DataTable | null = null;
+  selectedSchemas: Schema[] = [];
   constructor(private dataService: UploadService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
@@ -26,6 +26,7 @@ export class DataTableListComponent implements OnInit {
       this.dataTables = data;
     });
   }
+
   selectDataTable(dataTable: DataTable): void {
     this.selectedDataTable = dataTable;
     this.fetchSchemas(dataTable.idTable); // Fetch schemas when a data table is selected
@@ -61,7 +62,6 @@ export class DataTableListComponent implements OnInit {
     this.router.navigate(['/schemas', dataTable.idTable]);
   }
 
-  // In your component class
   mappingObject = {
     'union|membership|labor|labor|rights': 'GDPR:Trade union',
     'race|ethnicity|nationality|ancestry|background': 'GDPR:race/ethnic',
@@ -97,5 +97,10 @@ export class DataTableListComponent implements OnInit {
       }
     }
     return tags;
+  }
+
+  // Function to check if any schema has tags
+  hasTagsForAnySchema(schemas: Schema[]): boolean {
+    return schemas.some(schema => this.getTagsForSchema(schema).length > 0);
   }
 }

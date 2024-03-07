@@ -33,5 +33,7 @@
         <span class="tag">{{ tag }}</span>
       </div>
     </div>
+    <!-- Display "Sensitive" tag if there are other tags present -->
+    <span *ngIf="selectedSchemas.length > 0 && hasTagsForAnySchema(selectedSchemas)" class="tag">Sensitive</span>
   </div>
 </div>
