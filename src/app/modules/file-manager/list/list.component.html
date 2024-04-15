@@ -29,7 +29,7 @@
                     <!-- Actions -->
                     <div class="mt-4 sm:mt-0">
                         <!-- Upload button -->
-                        <input type="file" (change)="onFileSelected($event)" />
+                        <input type="file"  (change)="onFileSelected($event)" />
                         <input type="text" [(ngModel)]="description" placeholder="  Enter file description" />
                         <button mat-flat-button [color]="'primary'" (click)="onUpload()">
                             <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>

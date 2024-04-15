@@ -62,7 +62,13 @@ export class FileManagerService
       deleteSchema(schemaId: number): Observable<any> {
         return this._httpClient.delete(`${this.baseUrl}/schemas/${schemaId}`);
       }
-
+      downloadDataTablePdf(tableId: number): Observable<Blob> {
+        return this._httpClient.get(`${this.baseUrl}/tables/${tableId}/download`, { responseType: 'blob' });
+      }
+      createSchema(tableId: number, schema: Schema): Observable<Schema> {
+        return this._httpClient.post<Schema>(`${this.baseUrl}/tables/${tableId}/schemas`, schema);
+      }
+      
 
 
 }

@@ -11,7 +11,7 @@ export interface DataTable {
     schemas: Schema[]; // Assuming a one-to-many relationship
   }
   export interface Schema {
-    idSchema: number;
+    idSchema?: number;
     name: string;
     type: string;
     description: string;

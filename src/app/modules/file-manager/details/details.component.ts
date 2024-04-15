@@ -5,6 +5,7 @@ import { FileManagerListComponent } from 'app/modules/file-manager/list/list.com
 import { FileManagerService } from 'app/modules/file-manager/file-manager.service';
 import { DataTable, Schema } from 'app/modules/models/data-table';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'file-manager-details',
@@ -29,6 +30,7 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
         private _fileManagerListComponent: FileManagerListComponent,
         private _fileManagerService: FileManagerService,
         private _activatedRoute: ActivatedRoute,
+        public dialog: MatDialog, // Add this line
     ) {}
 
     ngOnInit(): void {
@@ -116,6 +118,7 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
             this.editedCreator = this.dataTable.creator;
             this.editedDescription = this.dataTable.description;
             this.isUpdating = true; // Enter update mode
+            
         }
     }
 
@@ -147,4 +150,14 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
     cancelUpdate(): void {
         this.isUpdating = false; // Exit update mode without saving changes
     }
+    downloadPdf(tableId: number): void {
+        this._fileManagerService.downloadDataTablePdf(tableId).subscribe(blob => {
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'datatable-details.pdf';
+          link.click();
+          URL.revokeObjectURL(link.href);
+        });
+      }
+
 }
