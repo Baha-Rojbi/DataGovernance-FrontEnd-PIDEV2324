@@ -1,62 +1,49 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import {  HttpClientModule } from '@angular/common/http';
-
-import { DataTableListComponent } from './data-table/data-table-list/data-table-list.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
-import { SchemasComponent } from './table-schema/table-schemas/schemas.component';
-import { EditSchemaDialogComponent } from './table-schema/edit-schema-dialog/edit-schema-dialog.component';
-import { MatIconModule } from '@angular/material/icon';
-import { EditDataTableDialogComponent } from './data-table/edit-data-table-dialog/edit-data-table-dialog.component';
-import { MatSelectModule } from '@angular/material/select';
-
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule } from '@angular/material/chips';
+import { ExtraOptions, PreloadAllModules, RouterModule } from '@angular/router';
+import { FuseModule } from '@fuse';
+import { FuseConfigModule } from '@fuse/services/config';
+import { FuseMockApiModule } from '@fuse/lib/mock-api';
+import { CoreModule } from 'app/core/core.module';
+import { appConfig } from 'app/core/config/app.config';
+import { mockApiServices } from 'app/mock-api';
+import { LayoutModule } from 'app/layout/layout.module';
+import { AppComponent } from 'app/app.component';
+import { appRoutes } from 'app/app.routing';
+import { FormsModule } from '@angular/forms';
 
-
-
+const routerConfig: ExtraOptions = {
+    preloadingStrategy       : PreloadAllModules,
+    scrollPositionRestoration: 'enabled'
+};
 
 @NgModule({
-  
-  declarations: [
-    AppComponent,
-    FileUploadComponent,
-    DataTableListComponent,
-    EditDataTableDialogComponent,
-    SchemasComponent,
-    EditSchemaDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    MatDialogModule,
-    BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatChipsModule
-    
+    declarations: [
+        AppComponent
+    ],
+    imports     : [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule.forRoot(appRoutes, routerConfig),
 
-  ],
-  providers: [
-    provideClientHydration(),
-    provideAnimationsAsync()
-  ],
-  bootstrap: [AppComponent]
-  
+        // Fuse, FuseConfig & FuseMockAPI
+        FuseModule,
+        FuseConfigModule.forRoot(appConfig),
+        FuseMockApiModule.forRoot(mockApiServices),
+
+        // Core module of your application
+        CoreModule,
+
+        // Layout module of your application
+        LayoutModule,
+        FormsModule,
+        
+    ],
+    bootstrap   : [
+        AppComponent
+    ]
 })
-export class AppModule { }
+export class AppModule
+{
+}
