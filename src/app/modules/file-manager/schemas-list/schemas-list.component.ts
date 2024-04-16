@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Schema } from 'app/modules/models/data-table';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class SchemasListComponent implements OnInit, OnDestroy{
   schemas: Schema[] = [];
+  filteredSchemas: Schema[] = []; // Add this line
+  selectedTag: string | null = null;
  drawerMode: 'over' | 'side' = 'side';
   drawerOpened: boolean = true;
   searchQuery$: BehaviorSubject<string> = new BehaviorSubject(null);
@@ -23,21 +25,23 @@ export class SchemasListComponent implements OnInit, OnDestroy{
     private _router: Router,
     private _fileManagerService: FileManagerService,
     private _matDialog: MatDialog,
+    private _changeDetectorRef: ChangeDetectorRef
   ) {}
 
+ 
   ngOnInit(): void {
     this.subscriptions.add(
       this._activatedRoute.params.subscribe(params => {
         const tableId = +params['id'];
         this._fileManagerService.getSchemasForTable(tableId).subscribe(
           data => {
-            
             this.schemas = data;
-            console.log("Schemas fetched successfully:", data); // Ensure this consistently logs correct data
+            console.log("Schemas fetched successfully:", data);
+            this.filteredSchemas = [...this.schemas]; // Add this line
+            this._changeDetectorRef.detectChanges(); // Manually trigger change detection
           },
           error => console.error('Error retrieving schemas', error)
         );
-        
       })
     );
   }
@@ -60,7 +64,15 @@ export class SchemasListComponent implements OnInit, OnDestroy{
         data: { schema: schema }
     });
 }
-
+filterByTag(tag: string): void {
+  if (this.selectedTag === tag) {
+    this.selectedTag = null;
+    this.filteredSchemas = [...this.schemas];
+  } else {
+    this.selectedTag = tag;
+    this.filteredSchemas = this.schemas.filter(schema => schema.tags.includes(tag));
+  }
+}
 
 
 }

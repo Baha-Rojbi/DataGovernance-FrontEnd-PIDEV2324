@@ -27,9 +27,14 @@
                     
 
                     <!-- Actions -->
-                    <div class="mt-4 sm:mt-0">
+                    <div class="mt-4 sm:mt-0 flex items-center space-x-2">
                         <!-- Upload button -->
-                        <input type="file"  (change)="onFileSelected($event)" />
+                        <input type="file" (change)="onFileSelected($event)" class="file-input text-sm text-grey-500
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-violet-50 file:text-violet-700
+            hover:file:bg-violet-100"/>
                         <input type="text" [(ngModel)]="description" placeholder="  Enter file description" />
                         <button mat-flat-button [color]="'primary'" (click)="onUpload()">
                             <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>

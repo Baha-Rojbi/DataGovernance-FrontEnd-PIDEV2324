@@ -18,13 +18,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FuseMasonryModule } from '@fuse/components/masonry';
 import { SchemaDetailsComponent } from './schema-details/schema-details.component';
 
+
+
 @NgModule({
     declarations: [
         FileManagerComponent,
         FileManagerDetailsComponent,
         FileManagerListComponent,
         SchemasListComponent,
-        SchemaDetailsComponent
+        SchemaDetailsComponent,
     ],
     imports     : [
         RouterModule.forChild(fileManagerRoutes),
@@ -38,7 +40,8 @@ import { SchemaDetailsComponent } from './schema-details/schema-details.componen
         MatCardModule,
         MatChipsModule,
         MatFormFieldModule,
-        FuseMasonryModule
+        FuseMasonryModule,
+        
 
     ]
 })
