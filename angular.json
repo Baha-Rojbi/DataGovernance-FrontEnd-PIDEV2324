@@ -15,6 +15,7 @@
         "@schematics/angular:pipe": {
           "standalone": false
         }
+<<<<<<< Updated upstream
       },
       "root": "",
       "sourceRoot": "src",
@@ -107,6 +108,11 @@
           }
         }
       }
+=======
+    },
+    "cli": {
+      "analytics": false
+>>>>>>> Stashed changes
     }
   }
 }
