@@ -123,31 +123,42 @@
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-xl">
                 <form class="flex flex-col gap-4">
                     <!-- Name Field -->
-                    <mat-form-field appearance="fill" class="w-full">
-                        <mat-label>Name :</mat-label>
-                        <input matInput [(ngModel)]="editedName" name="name" placeholder="Enter Name">
-                    </mat-form-field>
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name :</label>
+                        <input type="text" id="name" [(ngModel)]="editedName" name="name" placeholder="Enter Name"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
                     
                     <!-- Creator Field -->
-                    <mat-form-field appearance="fill" class="w-full">
-                        <mat-label>Creator : </mat-label>
-                        <input matInput [(ngModel)]="editedCreator" name="creator" placeholder="Enter Creator">
-                    </mat-form-field>
+                    <div class="mb-4">
+                        <label for="creator" class="block text-sm font-medium text-gray-700">Creator : </label>
+                        <input type="text" id="creator" [(ngModel)]="editedCreator" name="creator" placeholder="Enter Creator"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    </div>
                     
                     <!-- Description Field -->
-                    <mat-form-field appearance="fill" class="w-full">
-                        <mat-label>Description : </mat-label>
-                        <textarea matInput [(ngModel)]="editedDescription" name="description" placeholder="Enter Description"></textarea>
-                    </mat-form-field>
-              
+                    <div class="mb-4">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Description : </label>
+                        <textarea id="description" [(ngModel)]="editedDescription" name="description"
+                            placeholder="Enter Description"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                    </div>
+                
                     <!-- Confirm and Cancel Buttons -->
                     <div class="flex justify-end gap-2">
-                        <button type="button" mat-raised-button color="primary" (click)="confirmUpdate()">Confirm</button>
-                        <button type="button" mat-raised-button color="warn" (click)="cancelUpdate()">Cancel</button>
+                        <button type="button" mat-raised-button color="primary" (click)="confirmUpdate()"
+                            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                            Confirm
+                        </button>
+                        <button type="button" mat-raised-button color="warn" (click)="cancelUpdate()"
+                            class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">
+                            Cancel
+                        </button>
                     </div>
                 </form>
             </div>
         </ng-container>
+        
         
 
     </div>

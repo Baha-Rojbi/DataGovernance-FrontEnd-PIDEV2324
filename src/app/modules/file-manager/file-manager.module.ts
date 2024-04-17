@@ -9,7 +9,7 @@ import { fileManagerRoutes } from 'app/modules/file-manager/file-manager.routing
 import { FileManagerComponent } from 'app/modules/file-manager/file-manager.component';
 import { FileManagerDetailsComponent } from 'app/modules/file-manager/details/details.component';
 import { FileManagerListComponent } from 'app/modules/file-manager/list/list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SchemasListComponent } from './schemas-list/schemas-list.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatCardModule } from '@angular/material/card';
@@ -48,7 +48,9 @@ import { CreateDataTableFormComponent } from './create-data-table-form/create-da
         FuseMasonryModule,
         MatDialogModule,
         MatSnackBarModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        ReactiveFormsModule
+        
 
     ]
 })

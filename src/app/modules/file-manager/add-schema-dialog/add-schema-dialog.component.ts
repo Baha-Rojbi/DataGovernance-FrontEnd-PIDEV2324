@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-schema-dialog',
@@ -11,9 +11,9 @@ export class AddSchemaDialogComponent {
 
   constructor(private fb: FormBuilder) {
     this.addSchemaForm = this.fb.group({
-      name: [''],
-      type: [''],
-      description: [''],
+      name: ['', Validators.required],
+      type: ['', Validators.required],
+      description: ['']
     });
   }
 }

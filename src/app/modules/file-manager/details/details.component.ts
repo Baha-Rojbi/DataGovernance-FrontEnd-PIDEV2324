@@ -125,29 +125,29 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
     }
 
     confirmUpdate(): void {
-        if (this.dataTable) {
+      if (this.dataTable) {
+          const updatedDataTable: DataTable = {
+              ...this.dataTable,
+              name: this.editedName || this.dataTable.name, 
+              creator: this.editedCreator || this.dataTable.creator,
+              description: this.editedDescription || ''
+          };
           
-            const updatedDataTable: DataTable = {
-                ...this.dataTable,
-                name: this.editedName || this.dataTable.name, 
-                creator: this.editedCreator || this.dataTable.creator,
-                description: this.editedDescription || ''
-            };
-            
-            this._fileManagerService.updateDataTable(updatedDataTable).subscribe({
-                next: () => {
-                    this.dataTable = updatedDataTable; 
-                    alert("DataTable updated successfully!"); 
-                    this.isUpdating = false; 
-                    this._changeDetectorRef.markForCheck(); // Trigger change detection
-                },
-                error: (error) => {
-                    console.error("Failed to update DataTable:", error);
-                    
-                }
-            });
-        }
-    }
+          this._fileManagerService.updateDataTable(updatedDataTable).subscribe({
+              next: () => {
+                  this.dataTable = updatedDataTable; 
+                  alert("DataTable updated successfully!"); 
+                  this.isUpdating = false; 
+                  this._changeDetectorRef.markForCheck(); // Trigger change detection
+              },
+              error: (error) => {
+                  console.error("Failed to update DataTable:", error);
+                  
+              }
+          });
+      }
+  }
+  
 
     cancelUpdate(): void {
         this.isUpdating = false; // Exit update mode without saving changes
@@ -161,27 +161,27 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
           URL.revokeObjectURL(link.href);
         });
       }
-      toggleArchiveStatus(archived: boolean): void {
-        if (this.dataTable) {
-          this._fileManagerService.toggleArchiveStatus(this.dataTable.idTable).subscribe({
-            next: () => {
-              this.dataTable.archived = archived;
-              const message = archived ? 'Data table archived' : 'Data table unarchived';
-              this._snackBar.open(message, 'Close', {
-                duration: 2000,
-                horizontalPosition: 'center',
-                verticalPosition: 'bottom'
-              });
-            },
-            error: (error) => {
-              console.error('Failed to toggle archive status:', error);
-              this._snackBar.open('Failed to toggle archive status', 'Close', {
-                duration: 2000,
-                horizontalPosition: 'center',
-                verticalPosition: 'bottom'
-              });
-            }
+ toggleArchiveStatus(archived: boolean): void {
+    if (this.dataTable) {
+      this._fileManagerService.toggleArchiveStatus(this.dataTable.idTable).subscribe({
+        next: () => {
+          this.dataTable.archived = archived;
+          const message = archived ? 'Data table archived' : 'Data table unarchived';
+          this._snackBar.open(message, 'Close', {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
+          });
+        },
+        error: (error) => {
+          console.error('Failed to toggle archive status:', error);
+          this._snackBar.open('Failed to toggle archive status', 'Close', {
+            duration: 2000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom'
           });
         }
-      }
+      });
+    }
+  }
 }
