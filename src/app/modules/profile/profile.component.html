@@ -1,0 +1,146 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="flex flex-col shadow bg-card">
+
+        <!-- Cover image -->
+        <div>
+            <img
+                class="h-40 lg:h-80 object-cover"
+                src="assets/images/profile/cover.jpg"
+                alt="Cover image">
+        </div>
+
+        <!-- User info -->
+        <div class="flex flex-col flex-0 lg:flex-row items-center max-w-5xl w-full mx-auto px-8 lg:h-18 bg-card">
+
+            <!-- Avatar -->
+            <div class="-mt-26 lg:-mt-22 rounded-full">
+                <img
+                    class="w-32 h-32 rounded-full ring-4 ring-bg-card"
+                    src={{User.avatar}}
+                    alt="User avatar">
+            </div>
+
+            <!-- Details -->
+            <div class="flex flex-col items-center lg:items-start mt-4 lg:mt-0 lg:ml-8">
+                <div class="text-lg font-bold leading-none">{{User.nom}}</div>
+                <div class="text-secondary">{{User.adresse.pays}}, {{User.adresse.ville}}</div>
+            </div>
+
+            <!-- Separator -->
+            <div class="hidden lg:flex h-8 mx-8 border-l-2"></div>
+
+            <!-- Stats -->
+            <div class="flex items-center mt-6 lg:mt-0 space-x-6">
+                <div class="flex flex-col items-center">
+                    <span class="font-bold">{{User.ownedTeamMembers.length}}</span>
+                    <span class="text-sm font-medium text-secondary">Team  members</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="font-bold">1.2k</span>
+                    <span class="text-sm font-medium text-secondary">FOLLOWING</span>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <!-- Main -->
+    <div class="flex flex-auto justify-center w-full max-w-5xl mx-auto p-6 sm:p-8">
+
+        <!-- Column -->
+        <div class="hidden lg:flex flex-col items-start mr-8">
+
+            <!-- About me -->
+            <fuse-card class="flex flex-col max-w-250 w-full p-8">
+                <div class="text-2xl font-semibold leading-tight">About Me</div>
+                <div class="mt-4">
+                    {{User.description}}
+                    <br><br>
+                </div>
+                <hr class="w-full border-t my-6">
+                <div class="flex flex-col">
+                    <div class="flex items-center">
+                        <mat-icon
+                            class="icon-size-5 mr-3"
+                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                        <span class="leading-none">{{User.adresse.pays}}, {{User.adresse.ville}}</span>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <mat-icon
+                            class="icon-size-5 mr-3"
+                            [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
+                        <span class="leading-none">{{ User.role.replace('_', ' ') | titlecase }},{{User.poste.replace('_', ' ') | titlecase }}</span>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <mat-icon
+                            class="icon-size-5 mr-3"
+                            [svgIcon]="'heroicons_solid:cake'"></mat-icon>
+                        <span class="leading-none">{{User.dateNaissance}}</span>
+                    </div>
+                </div>
+                <a
+                    class="px-6 mt-8"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [routerLink]="['/settings']">
+                    Click here to modify these informations                </a>
+            </fuse-card>
+
+
+
+
+        </div>
+
+         <!-- Column -->
+         <div class="hidden lg:flex flex-col items-start mr-8">
+
+            <!-- About me -->
+            <fuse-card class=" flex-col max-w-250 w-full p-8">
+                <div class="text-2xl font-semibold leading-tight">Professional Informations</div>
+                <div class="mt-4">
+                    All the available informations are donw below 
+                    <br><br>
+                </div>
+                <hr class="w-full border-t my-6">
+                <div class="flex flex-col">
+                    <div class="flex items-center">
+                        <mat-icon
+                            class="icon-size-5 mr-3"
+                            [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                        <span class="leading-none">{{User.email}}</span>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <mat-icon
+                            class="icon-size-5 mr-3"
+                            [svgIcon]="'heroicons_solid:identification'"></mat-icon>
+                        <span class="leading-none">{{User.ncin}}</span>
+                    </div>
+                    <div class="flex items-center mt-4">
+                        <mat-icon
+                            class="icon-size-5 mr-3"
+                            [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+                        <span class="leading-none">{{User.numTel}}</span>
+                    </div>
+                </div>
+                <a
+                    class="px-6 mt-8"
+                    mat-flat-button
+                    [color]="'primary'"
+                    [routerLink]="['./']">
+                    Click here to modify these informations
+                </a>
+            </fuse-card>
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
