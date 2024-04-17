@@ -20,7 +20,7 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
     schemas: Schema[] = []; // Store fetched schemas here
     isEditingDescription = false; // Track if we're editing the description
     isUpdating = false; // To track if the update form should be shown
-    // Temporary storage for edited values
+  
     editedName: string | undefined;
     editedCreator: string | undefined;
     editedDescription: string | undefined;
@@ -30,7 +30,7 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
         private _fileManagerListComponent: FileManagerListComponent,
         private _fileManagerService: FileManagerService,
         private _activatedRoute: ActivatedRoute,
-        public dialog: MatDialog, // Add this line
+        public dialog: MatDialog, 
     ) {}
 
     ngOnInit(): void {
@@ -59,7 +59,7 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
 
         } else {
             console.error("Invalid DataTable ID:", dataTableId);
-            // Handle the case where dataTableId is not valid (e.g., show an error or redirect)
+            
         }
     }
 
@@ -76,15 +76,15 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
         return item.idTable || index;
     }
 
-    // Implement getSelectedDataTableId based on your app's routing logic
+
     getSelectedDataTableId(): number {
-        // Assuming the route parameter name is 'id'
+
         return Number(this._activatedRoute.snapshot.paramMap.get('id'));
       }
       
       startEditDescription(): void {
-        this.editedDescription = this.dataTable?.description; // Initialize with the current description
-        this.isEditingDescription = true; // Enter editing mode
+        this.editedDescription = this.dataTable?.description; 
+        this.isEditingDescription = true; 
     }
 //description update
     confirmEditDescription(): void {
@@ -92,14 +92,14 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
             const updatedDataTable = { ...this.dataTable, description: this.editedDescription };
             this._fileManagerService.updateDataTable(updatedDataTable).subscribe({
                 next: () => {
-                    this.dataTable!.description = this.editedDescription; // Update the local state
-                    this.isEditingDescription = false; // Ensure this line is executed after a successful update
-                    this._changeDetectorRef.markForCheck(); // Notify Angular to check for changes
-                    // Optional: Show a success message
+                    this.dataTable!.description = this.editedDescription; 
+                    this.isEditingDescription = false; 
+                    this._changeDetectorRef.markForCheck(); 
+                   
                 },
                 error: (error) => {
                     console.error("Failed to update description:", error);
-                    // Optional: Handle error, potentially setting isEditingDescription based on the error
+                   
                 }
             });
         }
@@ -107,12 +107,12 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
     
 
     cancelEditDescription(): void {
-        this.isEditingDescription = false; // Exit editing mode without saving changes
+        this.isEditingDescription = false; 
     }
     //update
 
     startUpdate(): void {
-        // Initialize the edited values with the current dataTable values
+       
         if (this.dataTable) {
             this.editedName = this.dataTable.name;
             this.editedCreator = this.dataTable.creator;
@@ -124,24 +124,24 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
 
     confirmUpdate(): void {
         if (this.dataTable) {
-            // Update the dataTable with the edited values
+          
             const updatedDataTable: DataTable = {
                 ...this.dataTable,
-                name: this.editedName || this.dataTable.name, // Fallback to original if undefined
+                name: this.editedName || this.dataTable.name, 
                 creator: this.editedCreator || this.dataTable.creator,
                 description: this.editedDescription || ''
             };
             
             this._fileManagerService.updateDataTable(updatedDataTable).subscribe({
                 next: () => {
-                    this.dataTable = updatedDataTable; // Update local state
-                    alert("DataTable updated successfully!"); // Show success message
-                    this.isUpdating = false; // Exit update mode
+                    this.dataTable = updatedDataTable; 
+                    alert("DataTable updated successfully!"); 
+                    this.isUpdating = false; 
                     this._changeDetectorRef.markForCheck(); // Trigger change detection
                 },
                 error: (error) => {
                     console.error("Failed to update DataTable:", error);
-                    // Optionally handle error, e.g., show an error message
+                    
                 }
             });
         }

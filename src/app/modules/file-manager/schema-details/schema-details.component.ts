@@ -61,7 +61,7 @@ export class SchemaDetailsComponent implements OnInit, OnDestroy {
 
   private updateTagsInSchema(idSchema: number, tags: string[]): void {
       this._fileManagerService.updateTags(idSchema, tags).subscribe(() => {
-          // Assuming schema$ is a BehaviorSubject, you need to get the current value, update it, and emit a new value
+       
           const currentSchema = this.schema$.getValue();
           currentSchema.tags = tags;
           this.schema$.next(currentSchema);
@@ -70,16 +70,16 @@ export class SchemaDetailsComponent implements OnInit, OnDestroy {
   }
   deleteSchema(schema: Schema): void {
     if(confirm("Are you sure you want to delete this schema?")) {
-      console.log('Attempting to delete schema with ID:', schema.idSchema); // Debug log
+      console.log('Attempting to delete schema with ID:', schema.idSchema);
       this._fileManagerService.deleteSchema(schema.idSchema).subscribe({
         next: () => {
           console.log('Schema deleted successfully');
-          this._dialogRef.close(); // Close the dialog
-          // Here, you might want to emit an event or call a method to refresh the list of schemas
+          this._dialogRef.close(); 
+          
         },
         error: (error) => {
           console.error('There was an error deleting the schema', error);
-          // Handle the error, possibly showing an error message to the user
+
         }
       });
     }

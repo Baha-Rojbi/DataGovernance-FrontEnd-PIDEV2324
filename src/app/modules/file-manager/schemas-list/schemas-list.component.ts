@@ -40,7 +40,7 @@ export class SchemasListComponent implements OnInit, OnDestroy{
           data => {
             this.schemas = data;
             console.log("Schemas fetched successfully:", data);
-            this.filteredSchemas = [...this.schemas]; // Add this line
+            this.filteredSchemas = [...this.schemas]; 
             this._changeDetectorRef.detectChanges(); // Manually trigger change detection
           },
           error => console.error('Error retrieving schemas', error)
@@ -53,7 +53,7 @@ export class SchemasListComponent implements OnInit, OnDestroy{
     this.subscriptions.unsubscribe();
   }
   trackByFn(index: number, item: any): any {
-    return item.id; // or any other unique property of the item
+    return item.id; 
   }
   filterByQuery(query: string): void
   {
@@ -88,7 +88,7 @@ openAddSchemaDialog(tableId: number): void {
           // Optionally refresh the list or add the new schema to the view
           console.log('New schema added:', newSchema);
           this.schemas.push(newSchema);
-          this.filteredSchemas.push(newSchema); // If you're using filtering
+          this.filteredSchemas.push(newSchema); 
           this._changeDetectorRef.markForCheck(); // Ensure UI update
         },
         error: (error) => console.error('Error adding schema:', error)

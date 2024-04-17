@@ -59,8 +59,8 @@ export class FileManagerListComponent implements OnInit, OnDestroy
 
       
         // Fetch a single DataTable by ID when needed
-        // This example assumes you have a way to get the selected DataTable ID (e.g., from the URL or a selection event)
-        const selectedDataTableId: number = this.getSelectedDataTableId(); // Implement this method based on your app logic
+        
+        const selectedDataTableId: number = this.getSelectedDataTableId(); 
         this._fileManagerService.getDataTableById(selectedDataTableId)
           .pipe(takeUntil(this._unsubscribeAll))
           .subscribe((dataTable: DataTable) => {
@@ -77,7 +77,7 @@ export class FileManagerListComponent implements OnInit, OnDestroy
           });
       }
       getSelectedDataTableId(): number {
-        // Assuming the route parameter name is 'id'
+      
         return Number(this._activatedRoute.snapshot.paramMap.get('id'));
       }
     /**

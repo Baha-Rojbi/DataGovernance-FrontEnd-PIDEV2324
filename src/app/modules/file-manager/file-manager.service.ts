@@ -25,13 +25,13 @@ export class FileManagerService
       getDataTableById(id: number): Observable<DataTable | null> {
         if (id <= 0) {
             // Return null or throw a custom error
-            return of(null); // Using RxJS 'of' to return an observable of null
+            return of(null);
           }
         return this._httpClient.get<DataTable>(`${this.baseUrl}/tables/${id}`).pipe(
             catchError((error: HttpErrorResponse) => {
               // Handle the HTTP error here
               console.error('Error fetching DataTable by ID:', error);
-              return of(null); // Return null or an appropriate fallback value
+              return of(null); 
             })
         );
       }

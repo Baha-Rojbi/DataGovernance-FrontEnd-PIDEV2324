@@ -1,4 +1,4 @@
-<!-- schemas-list.component.html -->
+
 
 
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
@@ -30,7 +30,7 @@
                         </div>
                     </ng-container>
                     <!-- Edit Labels -->
-                    <!-- Adjust this part in your schemas-list.component.html -->
+
                     <div class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer hover:bg-indigo-600"
                     matRipple (click)="openAddSchemaDialog(tableId)" style="background-color: #4f46e5;">
                         <mat-icon class="text-white" [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
@@ -46,7 +46,7 @@
             <div class="flex flex-col flex-auto p-6 md:p-8">
               <ng-container *ngIf="schemas">
                 <ng-container *ngIf="schemas.length; else noNotes">
-                  <!-- Assume fuse-masonry is a custom component for layout -->
+         
                   <fuse-masonry class="flex flex-wrap -mx-2 mt-8" [items]="schemas" [columns]="masonryColumns" [columnsTemplate]="columnsTemplate">
                     <ng-template #columnsTemplate let-columns>
                       <ng-container *ngFor="let schema of filteredSchemas; trackBy: trackByFn">
