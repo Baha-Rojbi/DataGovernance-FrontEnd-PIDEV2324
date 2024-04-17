@@ -30,11 +30,14 @@
                         </div>
                     </ng-container>
                     <!-- Edit Labels -->
-                    <div class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer hover:bg-hover"
-                        matRipple>
-                        <mat-icon class="text-hint" [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
-                        <div class="ml-3 leading-5 select-none">Edit labels</div>
+                    <!-- Adjust this part in your schemas-list.component.html -->
+                    <div class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer hover:bg-indigo-600"
+                    matRipple (click)="openAddSchemaDialog(tableId)" style="background-color: #4f46e5;">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                        <div class="ml-3 leading-5 select-none text-white">Add a schema</div>
                     </div>
+                    
+
                 </div>
             </div>
         </mat-drawer>

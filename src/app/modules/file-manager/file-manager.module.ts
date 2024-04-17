@@ -17,6 +17,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FuseMasonryModule } from '@fuse/components/masonry';
 import { SchemaDetailsComponent } from './schema-details/schema-details.component';
+import { AddSchemaDialogComponent } from './add-schema-dialog/add-schema-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -27,6 +29,7 @@ import { SchemaDetailsComponent } from './schema-details/schema-details.componen
         FileManagerListComponent,
         SchemasListComponent,
         SchemaDetailsComponent,
+        AddSchemaDialogComponent,
     ],
     imports     : [
         RouterModule.forChild(fileManagerRoutes),
@@ -41,6 +44,7 @@ import { SchemaDetailsComponent } from './schema-details/schema-details.componen
         MatChipsModule,
         MatFormFieldModule,
         FuseMasonryModule,
+        MatDialogModule
         
 
     ]

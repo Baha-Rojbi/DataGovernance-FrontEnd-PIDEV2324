@@ -6,6 +6,7 @@ import { FileManagerService } from '../file-manager.service';
 import { SchemaDetailsComponent } from '../schema-details/schema-details.component';
 import { cloneDeep } from 'lodash';
 import { MatDialog } from '@angular/material/dialog';
+import { AddSchemaDialogComponent } from '../add-schema-dialog/add-schema-dialog.component';
 
 @Component({
   selector: 'app-schemas-list',
@@ -20,6 +21,8 @@ export class SchemasListComponent implements OnInit, OnDestroy{
   drawerOpened: boolean = true;
   searchQuery$: BehaviorSubject<string> = new BehaviorSubject(null);
   private subscriptions = new Subscription();
+  tableId: number;
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _router: Router,
@@ -32,8 +35,8 @@ export class SchemasListComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.subscriptions.add(
       this._activatedRoute.params.subscribe(params => {
-        const tableId = +params['id'];
-        this._fileManagerService.getSchemasForTable(tableId).subscribe(
+        this.tableId = +params['id'];
+        this._fileManagerService.getSchemasForTable(this.tableId).subscribe(
           data => {
             this.schemas = data;
             console.log("Schemas fetched successfully:", data);
@@ -73,6 +76,25 @@ filterByTag(tag: string): void {
     this.filteredSchemas = this.schemas.filter(schema => schema.tags.includes(tag));
   }
 }
+openAddSchemaDialog(tableId: number): void {
+  const dialogRef = this._matDialog.open(AddSchemaDialogComponent, {
+    width: '250px',
+  });
 
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this._fileManagerService.createSchema(tableId, result).subscribe({
+        next: (newSchema) => {
+          // Optionally refresh the list or add the new schema to the view
+          console.log('New schema added:', newSchema);
+          this.schemas.push(newSchema);
+          this.filteredSchemas.push(newSchema); // If you're using filtering
+          this._changeDetectorRef.markForCheck(); // Ensure UI update
+        },
+        error: (error) => console.error('Error adding schema:', error)
+      });
+    }
+  });
+}
 
 }

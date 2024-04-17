@@ -70,22 +70,26 @@ export class SchemaDetailsComponent implements OnInit, OnDestroy {
   }
   deleteSchema(schema: Schema): void {
     if(confirm("Are you sure you want to delete this schema?")) {
+      console.log('Attempting to delete schema with ID:', schema.idSchema); // Debug log
       this._fileManagerService.deleteSchema(schema.idSchema).subscribe({
         next: () => {
           console.log('Schema deleted successfully');
-          // Close the dialog or navigate away
-          this._dialogRef.close();
-          // Optionally, refresh the list of schemas if this component is part of a list view
+          this._dialogRef.close(); // Close the dialog
+          // Here, you might want to emit an event or call a method to refresh the list of schemas
         },
         error: (error) => {
           console.error('There was an error deleting the schema', error);
+          // Handle the error, possibly showing an error message to the user
         }
       });
     }
   }
+  
+  
     // Implement openTagAddDialog(schema) and deleteSchema(schema) as needed
 
     trackByFn(index: number, item: any): any {
         return item.id || index;
     }
+    
 }
