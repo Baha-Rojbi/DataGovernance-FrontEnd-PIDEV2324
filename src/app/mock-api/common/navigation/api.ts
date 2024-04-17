@@ -21,9 +21,9 @@ export class NavigationMockApi implements OnInit
      */
     constructor(private _fuseMockApiService: FuseMockApiService, private _sessionService : SessionService)
     {
-        this.setupNavigation()
 
- 
+     // Register Mock API handlers after setting up navigation
+     this.registerHandlers();
       
 
     }
