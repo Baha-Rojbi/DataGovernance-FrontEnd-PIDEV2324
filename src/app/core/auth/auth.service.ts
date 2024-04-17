@@ -15,6 +15,7 @@ export class AuthService
     private _authenticated: boolean = false;
     private _authApiUrl: string = environment.AuthApiUrl;
     private _userApiUrl: string = environment.UserApiUrl;
+    private _countryApiUrl : string = environment.apiUrl
 
      _user : User
     
@@ -333,4 +334,11 @@ export class AuthService
           );
           return result;
     }
+    
+    /**
+     * gettinhg the user owned team members  
+     */
+    getAllCountries(): Observable<any> {
+        return this._httpClient.get(this._countryApiUrl);    }
+
 }
