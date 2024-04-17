@@ -1,0 +1,103 @@
+
+
+
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent">
+
+        <!-- Drawer -->
+        <mat-drawer class="w-2/3 sm:w-72 lg:w-56 border-r-0 bg-default" [mode]="drawerMode" [opened]="drawerOpened"
+            #drawer>
+            <div class="p-6 lg:py-8 lg:pl-4 lg:pr-0">
+                <!-- Filters -->
+                <div class="space-y-2">
+                    <!-- tags -->
+                    <ng-container *ngIf="schemas">
+                        <div *ngFor="let schema of schemas">
+                            <ng-container *ngFor="let tag of schema.tags; trackBy: trackByFn">
+                                <div
+                                class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer"
+                                [ngClass]="{'bg-gray-200 dark:bg-gray-700 text-primary dark:text-primary-400':  tag === selectedTag,
+                                    'text-hint hover:bg-hover': 'tag:' + tag.id !== filterStatus}"
+                                    (click)="filterByTag(tag)"
+                                matRipple
+                                [matRippleDisabled]="'tag:' + tag.id === filterStatus">
+                                    <mat-icon class="text-current" [svgIcon]="'heroicons_outline:tag'"></mat-icon>
+                                    <div class="ml-3 leading-5 select-none text-default">{{tag}}</div>
+                                </div>
+
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                    <!-- Edit Labels -->
+
+                    <div class="relative flex items-center py-2 px-4 font-medium rounded-full cursor-pointer hover:bg-indigo-600"
+                    matRipple (click)="openAddSchemaDialog(tableId)" style="background-color: #4f46e5;">
+                        <mat-icon class="text-white" [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                        <div class="ml-3 leading-5 select-none text-white">Add a schema</div>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </mat-drawer>
+        <!-- Drawer Content -->
+        <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-transparent">
+            <div class="flex flex-col flex-auto p-6 md:p-8">
+              <ng-container *ngIf="schemas">
+                <ng-container *ngIf="schemas.length; else noNotes">
+         
+                  <fuse-masonry class="flex flex-wrap -mx-2 mt-8" [items]="schemas" [columns]="masonryColumns" [columnsTemplate]="columnsTemplate">
+                    <ng-template #columnsTemplate let-columns>
+                      <ng-container *ngFor="let schema of filteredSchemas; trackBy: trackByFn">
+                        <div class="flex-1 px-2 space-y-4">
+                          <div class="flex flex-col shadow rounded-2xl overflow-hidden cursor-pointer bg-card" (click)="openSchemaDialog(schema)">
+                            <div class="flex flex-auto flex-col p-6 space-y-4">
+                              <ng-container *ngIf="schema.name">
+                                <div class="flex items-center justify-center">
+                                  <div class="text-center font-semibold line-clamp-3">{{schema.name}}</div>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="schema.type">
+                                <div class="flex items-center">
+                                  <div class="text-violet-700 font-semibold">Type:</div>
+                                  <div class="ml-2" [class.text-xl]="schema.type.length < 70">{{schema.type}}</div>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="schema.description">
+                                <div class="text-sm text-gray-500">{{schema.description}}</div>
+                              </ng-container>
+                              <ng-container *ngIf="schema.tags">
+                                <div class="flex flex-wrap items-center -m-1">
+                                  <ng-container *ngFor="let tag of schema.tags; trackBy: trackByFn">
+                                    <div class="m-1 py-0.5 px-3 rounded-full text-sm font-medium text-gray-500 bg-gray-100 dark:text-gray-300 dark:bg-gray-700">
+                                      {{tag}}
+                                    </div>
+                                  </ng-container>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-container>
+                    </ng-template>
+                  </fuse-masonry>
+                </ng-container>
+              </ng-container>
+          
+              <!-- No schemas template -->
+              
+              <ng-template #noNotes>
+                <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                  <mat-icon class="icon-size-24" [svgIcon]="'heroicons_outline:document'"></mat-icon>
+                  <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">There are no schemas!</div>
+                </div>
+              </ng-template>
+            </div>
+          </mat-drawer-content>
+          
+       
+
+    </mat-drawer-container>
+
+</div>

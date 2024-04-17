@@ -92,6 +92,9 @@ export const appRoutes: Route[] = [
            
             // profile
             {path: 'profile', loadChildren: () => import('app/modules/profile/profile.module').then(m => m.ProfileModule)},
+            
+            {path: 'file-manager', loadChildren: () => import('app/modules/file-manager/file-manager.module').then(m => m.FileManagerModule)},
+
         ]
         
     },

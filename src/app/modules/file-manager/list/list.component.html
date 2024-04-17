@@ -1,0 +1,129 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent" (backdropClick)="onBackdropClicked()">
+        <!-- Drawer -->
+        <mat-drawer class="w-full sm:w-100 dark:bg-gray-900" [mode]="drawerMode" [opened]="false" [position]="'end'"
+            [disableClose]="true" #matDrawer>
+            <router-outlet></router-outlet>
+        </mat-drawer>
+
+        <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-transparent">
+            <!-- Main -->
+            <div class="flex flex-col flex-auto">
+                <!-- Header -->
+                <div
+                    class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
+                    <!-- Title and Toggle -->
+                    <div class="flex justify-between w-full">
+                        <div>
+                            <div class="text-4xl font-extrabold tracking-tight leading-none">File Manager</div>
+                            <div class="flex items-center mt-0.5 font-medium text-secondary">
+                                {{dataTables.length}} files
+                            </div>
+                            <button mat-button (click)="openCreateForm()" class="bg-[#4f46e5] text-white flex items-center justify-center py-2 px-4 rounded-md shadow">
+                                Create Data Table
+                            </button>
+                            
+                            
+                        </div>
+                        <!-- Slide Toggle for Archived -->
+                        
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mt-4 sm:mt-0 flex items-center space-x-2">
+                        <!-- Upload button -->
+                        <input type="file" (change)="onFileSelected($event)" class="file-input text-sm text-grey-500
+            file:mr-4 file:py-2 file:px-4
+            file:rounded-full file:border-0
+            file:text-sm file:font-semibold
+            file:bg-violet-50 file:text-violet-700
+            hover:file:bg-violet-100" />
+                        <input type="text" [(ngModel)]="description" placeholder="  Enter file description" />
+                        <button mat-flat-button [color]="'primary'" (click)="onUpload()">
+                            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                            <span class="ml-2 mr-1">Upload file</span>
+                        </button>
+                    </div>
+                    
+                </div>
+
+                <!-- Items list -->
+                <ng-container *ngIf="dataTables && dataTables.length > 0; else noItems">
+                      <div class="p-6 md:p-8 space-y-8">
+
+                        <!-- Files -->
+                        <ng-container *ngIf="dataTables.length > 0; ">
+                            <div>
+                                <div class="flex justify-between items-center">
+                                    <div class="font-medium">Files</div>
+                                    <!-- Slide Toggle for Archived positioned at the top right -->
+                                    <mat-slide-toggle [(ngModel)]="showArchived" (change)="onToggleChange()">Show Archived</mat-slide-toggle>
+                                </div>
+                                <div cdkDropList #filesList="cdkDropList" [cdkDropListData]="dataTables"
+                                    (cdkDropListDropped)="drop($event)" class="flex flex-wrap -m-2 mt-2">
+                                    <ng-container *ngFor="let dataTable of dataTables; trackBy: trackByFn">
+                                        <div *ngIf="!dataTable.archived || showArchived" cdkDrag class="relative w-40 h-40 m-2">
+                                        <div cdkDrag class="relative w-40 h-40 m-2">
+                                            <a class="absolute z-20 top-1.5 right-1.5 w-8 h-8 min-h-8"
+                                                (click)="$event.preventDefault()"
+                                                [routerLink]="['./details/', dataTable.idTable]" mat-icon-button>
+                                                <mat-icon class="icon-size-5"
+                                                    [svgIcon]="'heroicons_solid:information-circle'"></mat-icon>
+                                            </a>
+
+                                            <a class="flex flex-col w-40 h-40 m-2 p-4 shadow rounded-2xl cursor-pointer bg-card"
+                                                [routerLink]="['./schemas/', dataTable.idTable]">
+                                                <div class="aspect-[9/6]">
+                                                    <div class="flex items-center justify-center h-full">
+                                                        <!-- Icons -->
+                                                        <div class="relative">
+                                                            <mat-icon class="icon-size-14 text-hint opacity-50"
+                                                                [svgIcon]="'heroicons_solid:document'"></mat-icon>
+                                                            <div class="absolute left-0 bottom-0 px-1.5 rounded text-sm font-semibold leading-5 text-white"
+                                                                [ngClass]="{
+                                                                    'bg-amber-600': dataTable.fileType === 'CSV',
+                                                                    'bg-blue-600': dataTable.fileType === 'WORD',
+                                                                    'bg-green-600': dataTable.fileType === 'EXCEL',
+                                                                    'bg-red-600': dataTable.fileType === 'PDF',
+                                                                    'bg-gray-600': dataTable.fileType === 'IMAGE'
+                                                                }">
+                                                                {{dataTable.fileType ? dataTable.fileType.toUpperCase()
+                                                                : 'UNKNOWN'}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="flex flex-col flex-auto justify-center text-center text-sm font-medium">
+                                                    <div class="truncate" [matTooltip]="dataTable.name">
+                                                        {{dataTable.name}}</div>
+                                                    <ng-container *ngIf="dataTable.contents">
+                                                        <div class="text-secondary truncate">{{dataTable.contents}}
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </ng-container>
+
+                <!-- No items template -->
+                <ng-template #noItems>
+                    <div class="flex flex-auto flex-col items-center justify-center bg-gray-100 dark:bg-transparent">
+                        <mat-icon class="icon-size-24" [svgIcon]="'heroicons_outline:folder-open'"></mat-icon>
+                        <div class="mt-4 text-2xl font-semibold tracking-tight text-secondary">There are no items!</div>
+                    </div>
+                </ng-template>
+
+            </div>
+
+        </mat-drawer-content>
+
+    </mat-drawer-container>
+
+</div>

@@ -32,7 +32,7 @@ export var defaultNavigation: FuseNavigationItem[] = [
                 title: 'File Manager',
                 type : 'basic',
                 icon : 'heroicons_outline:cloud',
-                link : '/apps/file-manager'
+                link : '/file-manager'
             },
             {
                 id   : 'apps.academy',
