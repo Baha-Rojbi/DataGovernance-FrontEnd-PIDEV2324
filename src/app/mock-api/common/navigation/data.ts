@@ -89,7 +89,7 @@ export var defaultNavigation: FuseNavigationItem[] = [
                 title: 'Profile',
                 type : 'basic',
                 icon : 'heroicons_outline:user-circle',
-                link : '/pages/profile'
+                link : '/profile'
             },
             {
                 id   : 'pages.settings',

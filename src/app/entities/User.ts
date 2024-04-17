@@ -14,7 +14,7 @@ export class User {
   enabled: boolean = true;
   password: string = '';
   description : string = ''
-  societe : string = ''
+  societe : string 
   credentialsNonExpired: boolean = true;
   accountNonExpired: boolean = true;
   accountNonLocked: boolean = true;

@@ -89,8 +89,11 @@ export const appRoutes: Route[] = [
             {path: 'project', loadChildren: () => import('app/modules/admin/dashboards/project/project.module').then(m => m.ProjectModule)},
             // Settings
             {path: 'example', loadChildren: () => import('app/modules/admin/pending-user-request/pending-user-request.module').then(m => m.pendingUserRequestModule)},
-
+           
+            // profile
+            {path: 'profile', loadChildren: () => import('app/modules/profile/profile.module').then(m => m.ProfileModule)},
         ]
+        
     },
     // user routes
         {

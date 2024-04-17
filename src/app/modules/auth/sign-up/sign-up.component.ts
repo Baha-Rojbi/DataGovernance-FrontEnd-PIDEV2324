@@ -97,7 +97,7 @@ export class AuthSignUpComponent implements OnInit {
                     'qsdqsd@gmail.com',
                     [Validators.required, Validators.email],
                 ],
-                dateNaissance: [],
+                dateNaissance: ['', Validators.required],
                 sexe: ['', Validators.required],
             }),
             address: this._formBuilder.group({
@@ -138,7 +138,7 @@ export class AuthSignUpComponent implements OnInit {
                 ],
                 poste: ['', Validators.required],
                 role: ['', Validators.required],
-                dateEmbauche: [],
+                dateEmbauche: ['', Validators.required],
             }),
             step4: this._formBuilder.group({
                 avatar: ['', Validators.required],
@@ -258,6 +258,8 @@ export class AuthSignUpComponent implements OnInit {
         this.user.poste = step3.poste;
         this.user.role = step3.role;
         this.user.dateEmbauche = step3.dateEmbauche;
+        this.user.description = null;
+        this.user.societe = null;
     }
 
     /**
