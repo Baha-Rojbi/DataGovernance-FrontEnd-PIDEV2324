@@ -107,7 +107,8 @@ export const appRoutes: Route[] = [
                 // Settings
                 {path: 'settings', loadChildren: () => import('app/modules/settings/settings.module').then(m => m.SettingsModule)},
                 {path: 'tasks', loadChildren: () => import('app/modules/tasks/tasks.module').then(m => m.TasksModule)},
-    
+                {path: 'file-manager', loadChildren: () => import('app/modules/file-manager/file-manager.module').then(m => m.FileManagerModule)},
+
             ]
         },
 
