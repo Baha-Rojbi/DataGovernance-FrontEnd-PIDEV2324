@@ -48,6 +48,7 @@ export class AuthSignUpComponent implements OnInit {
     userPosteValues = userPosteValues;
     user: User = new User();
     ncinExistsError: boolean = false;
+    countries: any[] = [];
 
     /**
      * Constructor
@@ -143,6 +144,9 @@ export class AuthSignUpComponent implements OnInit {
                 avatar: ['', Validators.required],
             }),
         });
+
+        //calling country names
+        this.getAllAvailableCountrys()
     }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
@@ -290,5 +294,23 @@ export class AuthSignUpComponent implements OnInit {
             // Set isImageUploaded to false
             this.isImageUploaded = false;
         }
+    }
+
+    getAllAvailableCountrys(){
+        this._authService.getAllCountries().subscribe((data: any[]) => {
+            this.countries = data
+            this.countries = data.filter(country => country.name.common !== 'Israel');
+     // Sort the countries alphabetically by name
+     this.countries.sort((a, b) => {
+        const nameA = a.name.common.toLowerCase();
+        const nameB = b.name.common.toLowerCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+    });
+            this.countries.forEach(country => {
+                console.log(country.name.common); // Log the name of each country
+              })
+          });
     }
 }

@@ -233,19 +233,21 @@
                             Please specify you exact adress for verification
                         </p>
                         <div class="flex flex-col gt-xs:flex-row">
-                            <mat-form-field class="flex-auto gt-xs:pr-3">
-                                <input
-                                    matInput
-                                    [formControlName]="'pays'"
-                                    [placeholder]="'Country'"
-                                    required>
+                            <mat-form-field class="flex">
+                                <mat-select
+                                [formControlName]="'pays'"
+                                placeholder="Choose your Country"
+                                    required
+                                >
+                                    <mat-option *ngFor="let country of countries" [value]="country.name.common">
+                                        {{ country.name.common }}
+                                    </mat-option>
+                                </mat-select>
                                 <mat-icon
                                     class="icon-size-5"
                                     matPrefix
-                                    [svgIcon]="'heroicons_outline:location-marker'"></mat-icon>
-                                    <mat-error *ngIf="signUpForm.get('address.pays').hasError('required')">Country is required</mat-error>
-                                    <mat-error *ngIf="signUpForm.get('address.pays').hasError('minlength')">Country should be at least 3 characters long</mat-error>
-                                    <mat-error *ngIf="signUpForm.get('address.pays').hasError('invalidFormat')">Invalid country name</mat-error>
+                                    [svgIcon]="'heroicons_outline:tag'"
+                                ></mat-icon>
                             </mat-form-field>
                             <mat-form-field class="flex-auto gt-xs:pl-3">
                                 <input

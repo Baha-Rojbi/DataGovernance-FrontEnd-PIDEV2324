@@ -13,6 +13,7 @@ export class AppComponent
      */
     constructor(private _sessionService : SessionService)
     {
+        
     }
 
     
