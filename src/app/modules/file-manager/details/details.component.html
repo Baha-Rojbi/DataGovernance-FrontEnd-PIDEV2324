@@ -6,7 +6,10 @@
             <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
         </a>
     </div>
-
+<mat-slide-toggle [ngModel]="dataTable?.archived" (ngModelChange)="toggleArchiveStatus($event)">
+    {{ dataTable?.archived ? 'Archieved' : 'Not Archieved' }}
+  </mat-slide-toggle>
+  
     <!-- Preview -->
     <div class="mt-8 aspect-[9/6]">
         <div class="flex items-center justify-center h-full border rounded-lg bg-gray-50 dark:bg-card">

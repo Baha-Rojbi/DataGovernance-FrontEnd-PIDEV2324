@@ -9,6 +9,7 @@ export interface DataTable {
     size: number; // File size
     creator: string; // Name of the creator
     schemas: Schema[]; // Assuming a one-to-many relationship
+    archived: boolean;
   }
   export interface Schema {
     idSchema?: number;

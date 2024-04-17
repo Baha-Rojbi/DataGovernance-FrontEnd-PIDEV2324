@@ -68,7 +68,12 @@ export class FileManagerService
       createSchema(tableId: number, schema: Schema): Observable<Schema> {
         return this._httpClient.post<Schema>(`${this.baseUrl}/tables/${tableId}/schemas`, schema);
       }
-      
-
+      toggleArchiveStatus(dataTableId: number): Observable<void> {
+        return this._httpClient.put<void>(`${this.baseUrl}/tables/${dataTableId}/toggle-archive`, null);
+      }
+      createDataTable(name: string, description: string): Observable<any> {
+        const payload = { name, description };
+        return this._httpClient.post(`${this.baseUrl}/tables/create`, payload);
+      }
 
 }

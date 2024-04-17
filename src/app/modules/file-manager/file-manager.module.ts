@@ -19,8 +19,9 @@ import { FuseMasonryModule } from '@fuse/components/masonry';
 import { SchemaDetailsComponent } from './schema-details/schema-details.component';
 import { AddSchemaDialogComponent } from './add-schema-dialog/add-schema-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CreateDataTableFormComponent } from './create-data-table-form/create-data-table-form.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         SchemasListComponent,
         SchemaDetailsComponent,
         AddSchemaDialogComponent,
+        CreateDataTableFormComponent,
     ],
     imports     : [
         RouterModule.forChild(fileManagerRoutes),
@@ -44,8 +46,9 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatChipsModule,
         MatFormFieldModule,
         FuseMasonryModule,
-        MatDialogModule
-        
+        MatDialogModule,
+        MatSnackBarModule,
+        MatSlideToggleModule
 
     ]
 })

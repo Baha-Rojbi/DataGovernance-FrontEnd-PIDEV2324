@@ -6,6 +6,7 @@ import { FileManagerService } from 'app/modules/file-manager/file-manager.servic
 import { DataTable, Schema } from 'app/modules/models/data-table';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'file-manager-details',
@@ -31,6 +32,7 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
         private _fileManagerService: FileManagerService,
         private _activatedRoute: ActivatedRoute,
         public dialog: MatDialog, 
+        private _snackBar: MatSnackBar
     ) {}
 
     ngOnInit(): void {
@@ -159,5 +161,27 @@ export class FileManagerDetailsComponent implements OnInit, OnDestroy {
           URL.revokeObjectURL(link.href);
         });
       }
-
+      toggleArchiveStatus(archived: boolean): void {
+        if (this.dataTable) {
+          this._fileManagerService.toggleArchiveStatus(this.dataTable.idTable).subscribe({
+            next: () => {
+              this.dataTable.archived = archived;
+              const message = archived ? 'Data table archived' : 'Data table unarchived';
+              this._snackBar.open(message, 'Close', {
+                duration: 2000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
+              });
+            },
+            error: (error) => {
+              console.error('Failed to toggle archive status:', error);
+              this._snackBar.open('Failed to toggle archive status', 'Close', {
+                duration: 2000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom'
+              });
+            }
+          });
+        }
+      }
 }
