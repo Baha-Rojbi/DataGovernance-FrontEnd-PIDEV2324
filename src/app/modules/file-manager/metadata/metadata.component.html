@@ -1,0 +1,51 @@
+<form class="metadata-form" (ngSubmit)="saveMetadata()" #metadataForm="ngForm">
+    <!-- Form fields for metadata -->
+    <div class="form-group">
+        <label for="nom">Nom:</label>
+        <input type="text" [(ngModel)]="metadata.nom" name="nom" required id="nom" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="prenom">Prenom:</label>
+        <input type="text" [(ngModel)]="metadata.prenom" name="prenom" required id="prenom" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="accessRights">Access Rights:</label>
+        <mat-select [(ngModel)]="metadata.accessRights" name="accessRights" id="accessRights" multiple  class="form-control">
+            <mat-option value="CREATE">CREATE</mat-option>
+            <mat-option value="READ">READ</mat-option>
+            <mat-option value="UPDATE">UPDATE</mat-option>
+        </mat-select>
+    </div>
+    <div class="form-group">
+        <label for="notes">Notes:</label>
+        <input type="text" [(ngModel)]="metadata.notes" name="notes" required id="notes" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="context">Context:</label>
+        <input type="text" [(ngModel)]="metadata.context" name="context" required id="context" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="keywords">Keywords:</label>
+        <input type="text" [(ngModel)]="metadata.keywords" name="keywords" required id="keywords" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="format">Format:</label>
+        <input type="text" [(ngModel)]="metadata.format" name="format" required id="format" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="dataType">Status:</label>
+        <input type="text" [(ngModel)]="metadata.dataType" name="dataType" required id="dataType" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="sensitive">Sensitive:</label>
+        <select [(ngModel)]="metadata.sensitive" name="sensitive" id="sensitive" class="form-control">
+            <option value="0">no sensitive</option>
+            <option value="1">sensitive</option>
+        </select>
+    </div>
+    
+    <!-- Add other fields for additional properties as needed -->
+    <div class="form-group text-right">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

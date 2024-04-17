@@ -1,0 +1,52 @@
+.metadata-form {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  /* Styles personnalisés pour le titre du modal */
+.modal-title {
+    font-size: 24px; /* Taille de la police */
+    font-weight: bold; /* Gras */
+    color: #333; /* Couleur du texte */
+    margin-bottom: 20px; /* Marge inférieure */
+}
+
+
+
+/* Margin left auto to push the close button to the right */
+.close {
+    margin-left: auto; /* Push the close button to the right edge */
+}
+
+/* Keep other styles as they are */
+.metadata-form {
+    max-width: 500px;
+    margin: 0 auto;
+}

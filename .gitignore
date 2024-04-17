@@ -1,5 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+<<<<<<< Updated upstream
 # Compiled output
 /dist
 /tmp
@@ -13,6 +14,23 @@ yarn-error.log
 
 # IDEs and editors
 .idea/
+=======
+# compiled output
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+
+# dependencies
+/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+
+# IDEs and editors
+/.idea
+>>>>>>> Stashed changes
 .project
 .classpath
 .c9/
@@ -20,7 +38,11 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
+<<<<<<< Updated upstream
 # Visual Studio Code
+=======
+# IDE - VSCode
+>>>>>>> Stashed changes
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -28,6 +50,7 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
+<<<<<<< Updated upstream
 # Miscellaneous
 /.angular/cache
 .sass-cache/
@@ -38,5 +61,19 @@ testem.log
 /typings
 
 # System files
+=======
+# misc
+/.angular/cache
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+>>>>>>> Stashed changes
 .DS_Store
 Thumbs.db
