@@ -16,10 +16,6 @@ export class UploadService {
   uploadFile(formData: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}/upload`, formData);
   }
-  fetchData(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/data`);
-  }
-
 
   getDataTables(): Observable<DataTable[]> {
     return this.http.get<DataTable[]>(`${this.baseUrl}/tables`);
@@ -40,5 +36,11 @@ export class UploadService {
   updateTags(idSchema: number, tags: string[]): Observable<any> {
     return this.http.put(`${this.baseUrl}/schemas/${idSchema}/tags`, tags);
   }
-  
+  saveFormData(formData: any): Observable<any> {
+    return this.http.post('http://localhost:8075/api/form/save', formData);
+  }
+
+  getFormData(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/get/${id}`);
+  }
 }

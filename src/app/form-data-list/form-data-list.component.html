@@ -1,0 +1,55 @@
+<h2>Form Data List</h2>
+<ul>
+  <li class="button-like" *ngFor="let formData of formDataList" (click)="getFormDataDetails(formData)">
+    <span>{{ formData.tableName }}</span>
+    <button class="pdf-button" (click)="exportPdf(selectedFormData)">Get PDF</button>
+  </li>
+</ul>
+<div *ngIf="selectedFormData" class="selected-form-data">
+    <h3>Selected Form Data</h3>
+    <table>
+      <tr>
+        <td><strong>Table Name:</strong></td>
+        <td>{{ selectedFormData.tableName }}</td>
+      </tr>
+      <tr>
+        <td><strong>Owner:</strong></td>
+        <td>{{ selectedFormData.owner }}</td>
+      </tr>
+      <tr>
+        <td><strong>Completeness:</strong></td>
+        <td>{{ selectedFormData.completeness }}</td>
+      </tr>
+      <tr>
+        <td><strong>Conformity:</strong></td>
+        <td>{{ selectedFormData.conformity }}</td>
+      </tr>
+      <tr>
+        <td><strong>Uniqueness:</strong></td>
+        <td>{{ selectedFormData.uniqueness }}</td>
+      </tr>
+      <tr>
+        <td><strong>Accuracy:</strong></td>
+        <td>{{ selectedFormData.accuracy }}</td>
+      </tr>
+      <tr>
+        <td><strong>Validity:</strong></td>
+        <td>{{ selectedFormData.validity }}</td>
+      </tr>
+      <tr>
+        <td><strong>Consistency:</strong></td>
+        <td>{{ selectedFormData.consistency }}</td>
+      </tr>
+      <tr>
+        <td><strong>Integrity:</strong></td>
+        <td>{{ selectedFormData.integrity }}</td>
+      </tr>
+      <tr>
+        <td colspan="2">
+            <button class="pdf-button" (click)="exportPdf(selectedFormData)">Get PDF</button>
+
+        </td>
+      </tr>
+    </table>
+  </div>
+  

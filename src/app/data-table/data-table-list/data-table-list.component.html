@@ -14,9 +14,15 @@
         <span class="tag">Source: {{ dataTable.source }}</span>
         <span class="tag">Creation Date: {{ dataTable.creationDate }}</span>
         <span class="tag">Size: {{ dataTable.size }}</span>
-        <button class="details-button" (click)="openDetailsPanel(dataTable)">test</button>
         <!-- Display "Sensitive" tag if sensitive information is found in dataTable.name -->
         <span *ngIf="getTagsForDataTable(dataTable).includes('Sensitive')" class="tag">Sensitive</span>
+      </div>
+      <!-- Move the button to the card footer -->
+      <div class="card-footer">
+        <!-- Add a button to navigate to the form page -->
+        <button (click)="navigateToFormPage(dataTable)" class="btn btn-primary">Make Repport
+      </button>
+
       </div>
     </div>
   </div>

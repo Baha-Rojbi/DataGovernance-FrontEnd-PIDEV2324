@@ -1,0 +1,50 @@
+/* CSS for Form Component */
+
+/* Container */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Form */
+  form {
+    width: 400px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Label */
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Input and Select */
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+  }
+  
+  /* Button */
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

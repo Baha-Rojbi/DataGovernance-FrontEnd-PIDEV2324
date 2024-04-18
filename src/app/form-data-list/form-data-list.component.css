@@ -1,0 +1,80 @@
+/* Style for the form data list */
+ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the selected form data */
+  .selected-form-data {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  .selected-form-data h3 {
+    margin-top: 0;
+  }
+  
+  /* Style for the button-like list item */
+  .button-like {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #c3c3c3; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-like:hover {
+    background-color: #525353; /* Button background color on hover */
+  }
+  /* Style for the button-like list item */
+.button-like {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-like:hover {
+    background-color: #0056b3; /* Button background color on hover */
+  }
+  
+  /* Style for the PDF button */
+  .pdf-button {
+    background-color: #a72828; /* PDF button background color */
+    color: #fff; /* PDF button text color */
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pdf-button:hover {
+    background-color: #882121; /* PDF button background color on hover */
+  }
+  
+  /* Style for the selected form data */
+  .selected-form-data {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  .selected-form-data h3 {
+    margin-top: 0;
+  }
+  

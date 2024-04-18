@@ -1,0 +1,84 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="tableName">Table Name:</label>
+      <input type="text" id="tableName" name="tableName" formControlName="tableName" readonly>
+    </div>
+    <div>
+      <label for="owner">Owner:</label>
+      <input type="text" id="owner" name="owner" formControlName="owner" readonly>
+    </div>
+    <div>
+      <label for="completeness">Completeness:</label>
+      <select id="completeness" name="completeness" formControlName="completeness" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <label for="conformity">Conformity:</label>
+      <select id="conformity" name="conformity" formControlName="conformity" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <label for="uniqueness">Uniqueness:</label>
+      <select id="uniqueness" name="uniqueness" formControlName="uniqueness" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <label for="accuracy">Accuracy:</label>
+      <select id="accuracy" name="accuracy" formControlName="accuracy" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <label for="validity">Validity:</label>
+      <select id="validity" name="validity" formControlName="validity" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <label for="consistency">Consistency:</label>
+      <select id="consistency" name="consistency" formControlName="consistency" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <label for="integrity">Integrity:</label>
+      <select id="integrity" name="integrity" formControlName="integrity" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+  

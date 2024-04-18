@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // Import Router
 import { UploadService } from '../../services/upload.service';
-
 import { DataTable, Schema } from '../../models/data-table';
 import { EditDataTableDialogComponent } from '../edit-data-table-dialog/edit-data-table-dialog.component';
+import { FormComponent } from '../../form/form.component'; 
 
 @Component({
   selector: 'app-data-table-list',
@@ -16,7 +16,7 @@ export class DataTableListComponent implements OnInit {
   selectedDataTable: DataTable | null = null;
   selectedSchemas: Schema[] = [];
 
-  constructor(private dataService: UploadService, private dialog: MatDialog, private router: Router) {}
+  constructor(private dataService: UploadService, private dialog: MatDialog, private router: Router) {} // Inject Router
 
   ngOnInit(): void {
     this.fetchDataTables();
@@ -30,12 +30,12 @@ export class DataTableListComponent implements OnInit {
 
   selectDataTable(dataTable: DataTable): void {
     this.selectedDataTable = dataTable;
-    this.fetchSchemas(dataTable.idTable); // Fetch schemas when a data table is selected
+    this.fetchSchemas(dataTable.idTable);
   }
 
   fetchSchemas(tableId: number): void {
     this.dataService.getSchemasForTable(tableId).subscribe(schemas => {
-      this.selectedSchemas = schemas; // Store fetched schemas
+      this.selectedSchemas = schemas;
     });
   }
 
@@ -100,20 +100,18 @@ export class DataTableListComponent implements OnInit {
     return tags;
   }
 
-  // Function to check if any schema has tags
   hasTagsForAnySchema(schemas: Schema[]): boolean {
     return schemas.some(schema => this.getTagsForSchema(schema).length > 0);
   }
 
-  openDetailsPanel(dataTable: any) {
-    
-    if (dataTable && dataTable.idTable) {
-      console.log("Opening details panel for data table:", dataTable);
-      // Navigate to a new route with details panel at the top
-      this.router.navigate(['/test', dataTable.idTable]);
-    } else {
-      console.error("Data table or its ID is undefined:", dataTable);
-    }
+  navigateToFormPage(dataTable: DataTable): void {
+    this.router.navigate(['/form'], { 
+      queryParams: { 
+        name: dataTable.name,
+        creator: dataTable.creator
+      } 
+    });
   }
-
-}
+  
+  
+}  
