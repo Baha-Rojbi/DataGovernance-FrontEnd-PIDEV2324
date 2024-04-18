@@ -16,6 +16,7 @@ export class AuthService
     private _authApiUrl: string = environment.AuthApiUrl;
     private _userApiUrl: string = environment.UserApiUrl;
     private _countryApiUrl : string = environment.apiUrl
+    private _adminApiUrl : string = environment.AdminApiUrl
 
      _user : User
     
@@ -339,6 +340,8 @@ export class AuthService
      * gettinhg the user owned team members  
      */
     getAllCountries(): Observable<any> {
-        return this._httpClient.get(this._countryApiUrl);    }
+        return this._httpClient.get(this._countryApiUrl);  
+    }
+
 
 }

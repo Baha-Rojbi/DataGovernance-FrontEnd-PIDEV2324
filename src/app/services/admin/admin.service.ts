@@ -22,4 +22,11 @@ export class AdminService {
   affectRoleAndChangeStatus(affectRoleAndChangeStatus:  AffectRoleAndChangeStatus): Observable<User> {
     return this.http.put<User>(`${this.AdminApiUrl}/affectRoleAndChangeStatus`,affectRoleAndChangeStatus)
   }
+
+    /**
+     * gettinhg the stats 
+     */
+      getUserStatusCount(): Observable<any> {
+        return this.http.get<User[]>(`${this.AdminApiUrl}/getUserStatusCount`)
+      }
 }

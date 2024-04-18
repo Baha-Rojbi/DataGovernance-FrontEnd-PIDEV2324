@@ -6,6 +6,7 @@ import { ProjectService } from 'app/modules/admin/dashboards/project/project.ser
 import { SessionService } from 'app/services/session/session.service';
 import { User } from 'app/entities/User';
 import { UserService } from 'app/core/user/user.service';
+import { AdminService } from 'app/services/admin/admin.service';
 
 @Component({
     selector       : 'project',
@@ -37,9 +38,11 @@ export class ProjectComponent implements OnInit, OnDestroy
         private _projectService: ProjectService,
         private _router: Router,
         private _sessionService : SessionService,
-        private _userService : UserService
+        private _userService : UserService,
+        private _adminService : AdminService
     )
     {
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -56,7 +59,6 @@ export class ProjectComponent implements OnInit, OnDestroy
         this.teamMembers = this._userService.clearOwnedTeamMembersImagesPath(this.user.ownedTeamMembers)
 
         this.teamMembersCount = this.teamMembers.length
-        
 
         // Get the data
         this._projectService.data$
@@ -83,7 +85,12 @@ export class ProjectComponent implements OnInit, OnDestroy
                 }
             }
         };
+
     }
+
+
+
+
 
     /**
      * On destroy

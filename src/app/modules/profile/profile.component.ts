@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User } from 'app/entities/User';
+import { AdminService } from 'app/services/admin/admin.service';
 import { SessionService } from 'app/services/session/session.service';
 
 @Component({
@@ -15,8 +16,9 @@ export class ProfileComponent implements OnInit
     /**
      * Constructor
      */
-    constructor(private _sessionService : SessionService) 
+    constructor(private _sessionService : SessionService, private adminService : AdminService) 
     {
+
         
     }
     ngOnInit(): void {

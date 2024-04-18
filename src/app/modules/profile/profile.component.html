@@ -34,7 +34,7 @@
             <!-- Stats -->
             <div class="flex items-center mt-6 lg:mt-0 space-x-6">
                 <div class="flex flex-col items-center">
-                    <span class="font-bold">{{User.ownedTeamMembers.length}}</span>
+                    <span class="font-bold">{{ User.ownedTeamMembers ? User.ownedTeamMembers.length : 0 }}</span>
                     <span class="text-sm font-medium text-secondary">Team  members</span>
                 </div>
                 <div class="flex flex-col items-center">
