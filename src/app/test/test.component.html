@@ -1,0 +1,22 @@
+<div>
+    <h2>Run Test</h2>
+    <form [formGroup]="testForm" (ngSubmit)="runTest()">
+      <div>
+        <label for="testName">Test Name:</label>
+        <input type="text" id="testName" formControlName="testName">
+      </div>
+      <div>
+        <label for="minColumns">Minimum Columns:</label>
+        <input type="number" id="minColumns" formControlName="minColumns">
+      </div>
+      <div>
+        <label for="maxColumns">Maximum Columns:</label>
+        <input type="number" id="maxColumns" formControlName="maxColumns">
+      </div>
+      <button type="submit" [disabled]="testForm.invalid">Run Test</button>
+    </form>
+    <div *ngFor="let result of testResults">
+      {{ result | json }}
+    </div>
+  </div>
+  

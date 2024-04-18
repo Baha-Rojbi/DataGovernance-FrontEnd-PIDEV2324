@@ -14,6 +14,7 @@
         <span class="tag">Source: {{ dataTable.source }}</span>
         <span class="tag">Creation Date: {{ dataTable.creationDate }}</span>
         <span class="tag">Size: {{ dataTable.size }}</span>
+        <button class="details-button" (click)="openDetailsPanel(dataTable)">test</button>
         <!-- Display "Sensitive" tag if sensitive information is found in dataTable.name -->
         <span *ngIf="getTagsForDataTable(dataTable).includes('Sensitive')" class="tag">Sensitive</span>
       </div>

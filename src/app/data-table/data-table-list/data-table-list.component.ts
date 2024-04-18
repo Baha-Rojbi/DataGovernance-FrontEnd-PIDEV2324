@@ -15,6 +15,7 @@ export class DataTableListComponent implements OnInit {
   dataTables: DataTable[] = [];
   selectedDataTable: DataTable | null = null;
   selectedSchemas: Schema[] = [];
+
   constructor(private dataService: UploadService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
@@ -103,4 +104,16 @@ export class DataTableListComponent implements OnInit {
   hasTagsForAnySchema(schemas: Schema[]): boolean {
     return schemas.some(schema => this.getTagsForSchema(schema).length > 0);
   }
+
+  openDetailsPanel(dataTable: any) {
+    
+    if (dataTable && dataTable.idTable) {
+      console.log("Opening details panel for data table:", dataTable);
+      // Navigate to a new route with details panel at the top
+      this.router.navigate(['/test', dataTable.idTable]);
+    } else {
+      console.error("Data table or its ID is undefined:", dataTable);
+    }
+  }
+
 }

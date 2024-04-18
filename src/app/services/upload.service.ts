@@ -16,6 +16,10 @@ export class UploadService {
   uploadFile(formData: FormData): Observable<any> {
     return this.http.post(`${this.baseUrl}/upload`, formData);
   }
+  fetchData(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/data`);
+  }
+
 
   getDataTables(): Observable<DataTable[]> {
     return this.http.get<DataTable[]>(`${this.baseUrl}/tables`);
