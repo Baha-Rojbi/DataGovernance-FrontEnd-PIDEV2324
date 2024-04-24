@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number of Tables</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    
+    .card-header {
+      background-color: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .card-title {
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+    <div class="flex-auto border-t -mt-px pt-4 sm:pt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+          <mat-tab-group class="sm:px-2" mat-stretch-tabs="false" [animationDuration]="'0'">
+            <mat-tab label="Home">
+              <ng-template matTabContent>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
+                  <!-- Display Table Count -->
+                  <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
+                    <div class="flex items-start justify-between">
+                      <div class="text-lg font-medium tracking-tight leading-6 truncate">Table Count</div>
+                    </div>
+                    <div class="flex flex-col items-center mt-2">
+                      <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">{{ tableCount }}</div>
+                      <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Tables</div>
+                      <div class="flex items-baseline justify-center w-full mt-5 text-secondary">
+                        <div class="text-md font-medium truncate">Base</div>
+                        <div class="ml-1.5 text-lg font-semibold">Uploadcsv</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="tableelementCount">
+                    <div *ngFor="let tableName of Object.keys(tableelementCount)">
+                      <p>{{ tableName }}: {{ tableelementCount[tableName] }}</p>
+                    </div>
+                  </div>
+                  
+                </div>
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+  
+  <!-- Bootstrap JS and jQuery (Optional) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

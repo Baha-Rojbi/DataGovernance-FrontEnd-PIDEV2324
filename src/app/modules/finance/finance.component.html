@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metadata</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .form-container {
+      margin-top: 50px;
+    }
+    .file-input-group {
+      margin-bottom: 20px;
+    }
+    .custom-file-upload {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .custom-file-upload:hover {
+      background-color: #0056b3;
+    }
+    .custom-file-upload input[type="file"] {
+      display: none;
+    }
+    .file-label {
+      display: inline-block;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #f8f9fa;
+      border: 1px solid #ced4da;
+      font-size: 16px;
+    }
+    .file-icon {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 form-container">
+      <form (ngSubmit)="uploadFiles()" enctype="multipart/form-data">
+        <div class="file-input-group">
+          <label class="file-label" for="csvFile">
+            <i class="fas fa-file-csv file-icon"></i>
+            Select CSV File
+          </label>
+          <input type="file" id="csvFile" name="csvFile" accept=".csv" (change)="onFileSelected($event)">
+        </div>
+        <div class="file-input-group">
+          <label class="file-label" for="pdfFile">
+            <i class="fas fa-file-pdf file-icon"></i>
+            Select PDF File
+          </label>
+          <input type="file" id="pdfFile" name="pdfFile" accept=".pdf" (change)="onFileSelected($event)">
+        </div>
+        <div class="file-input-group">
+          <label class="file-label" for="imageFile">
+            <i class="fas fa-image file-icon"></i>
+            Select Image File
+          </label>
+          <input type="file" id="imageFile" name="imageFile" accept=".jpeg,.jpg,.png" (change)="onFileSelected($event)">
+        </div>
+        <div class="file-input-group">
+          <label class="file-label" for="csvFile">
+            <i class="fas fa-file-excel file-icon"></i>
+            Select CSV File
+          </label>
+          <input type="file" id="csvFile" name="csvFile" accept=".csv" (change)="onFileSelected($event)">
+        </div>
+       
+        <button type="submit" class="btn btn-primary">Upload Files</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS (optional) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Font Awesome JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+
+</body>
+</html>

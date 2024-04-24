@@ -1,0 +1,412 @@
+<div class="w-full max-w-3xl">
+
+    <!-- Form -->
+    <form [formGroup]="accountForm">
+
+        <!-- Section -->
+        <div class="w-full">
+            <div class="text-xl">Profile</div>
+            <div class="text-secondary">Following information is publicly displayed, be careful!</div>
+        </div>
+        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+            <!-- Alert -->
+            <fuse-alert class="mt-8" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false" [type]="alert.type"
+                >
+                {{ alert.message }}
+            </fuse-alert>
+            <div class="sm:col-span-2">
+                <div class="relative w-32 h-32">
+                    <img
+                        style="margin-left: 100px;"
+                        class="w-full h-full rounded-full "
+                        [src]="getImageDataUrl()"
+                        alt="User avatar"
+                        (click)="fileInput.click()"
+                    > 
+                    <mat-icon
+                        class="icon-size-32"
+                        *ngIf="!accountForm.get('avatar').value && !user?.avatar"
+                        [svgIcon]="'heroicons_solid:user-circle'">
+                    </mat-icon>
+                    <div class="overlay" (click)="fileInput.click()"></div>
+                </div>
+                <input 
+                    type="file"
+                    #fileInput 
+                    (change)="onFileChange($event)" 
+                    style="display: none"
+                >
+            </div>
+
+            <!-- Name -->
+            <div class="sm:col-span-2">
+                <mat-form-field
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'">
+                    <mat-label>Name</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:user'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'nom'"
+                        matInput>
+                </mat-form-field>
+                <mat-error *ngIf="accountForm.get('nom').hasError('required')">Full name is required</mat-error>
+                <mat-error *ngIf="!accountForm.get('nom').hasError('required')&&accountForm.get('nom').hasError('invalidFormat')">Full name should contain only numbers</mat-error>
+                <mat-error *ngIf="!accountForm.get('nom').hasError('required')&&!accountForm.get('nom').hasError('invalidFormat')&&accountForm.get('nom').hasError('minlength')">Full name should be at least 3 letters long</mat-error>
+                <mat-error *ngIf="accountForm.get('nom').hasError('maxlength')">Full name maximum 20 letters long</mat-error>
+        
+            </div>
+
+            <div class="sm:col-span-2">
+                <mat-label>Date Embauche</mat-label>
+                <div 
+                class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-on-primary-200 bg-primary-200 text-on-primary-300 "
+                (click)="dateEmbauche.open()"
+            >
+                <mat-icon
+                    class="icon-size-5 text-current"
+                    [svgIcon]="'heroicons_solid:calendar'"
+                ></mat-icon>
+                <span class="ml-2 text-md font-medium">
+                    <ng-container
+                        *ngIf="
+                            accountForm.get(
+                                'dateEmbauche'
+                            ).value
+                        "
+                    >
+                        {{
+                            accountForm.get(
+                                "dateEmbauche"
+                            ).value | date : "longDate"
+                        }}
+                    </ng-container>
+                    <ng-container
+                        *ngIf="
+                            !accountForm.get(
+                                'dateEmbauche'
+                            ).value
+                        "
+                        >Not set</ng-container
+                    >
+                </span>
+                <mat-form-field
+                    class="fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none"
+                    [subscriptSizing]="'dynamic'"
+                >
+                    <input
+                        matInput
+                        [formControlName]="'dateEmbauche'"
+                        [matDatepicker]="dateEmbauche"
+                        [max]="calculateMinDate()"
+                    />
+                    <mat-datepicker #dateEmbauche>
+                        <mat-datepicker-actions>
+                            <button
+                                mat-button
+                                (click)="
+                                    accountForm
+                                        .get(
+                                            'dateEmbauche'
+                                        )
+                                        .setValue(null)
+                                "
+                                matDatepickerCancel
+                            >
+                                Clear
+                            </button>
+                            <button
+                                class=""
+                                mat-flat-button
+                                [color]="'primary'"
+                                matDatepickerApply
+                            >
+                                Select
+                            </button>
+                        </mat-datepicker-actions>
+                    </mat-datepicker>
+                </mat-form-field>
+            </div>
+            </div>
+
+
+            <!-- Role -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                    <mat-label>Role</mat-label>
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:location-marker'" matPrefix></mat-icon>
+                    <input  [formControlName]="'role'" matInput>
+                </mat-form-field>
+            </div>
+            <div class="sm:col-span-2">
+                <mat-form-field class="flex">
+                    <mat-label>Poste</mat-label>
+                    <mat-select
+                        [formControlName]="'poste'"
+                        placeholder="Choose your Title"
+                        required
+                    >
+                        <mat-option *ngFor="let poste of userPosteValues" [value]="poste">
+                            {{ poste.replace('_', ' ') | titlecase }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-icon
+                        class="icon-size-5"
+                        matPrefix
+                        [svgIcon]="'heroicons_outline:briefcase'"
+                    ></mat-icon>
+                </mat-form-field>
+            </div>
+            <!-- Company -->
+            <div class="sm:col-span-2">
+                <mat-form-field
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'">
+                    <mat-label>Company</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:office-building'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'company'"
+                        matInput>
+                </mat-form-field>
+            </div>
+            <!-- About -->
+            <div class="sm:col-span-4">
+                <mat-form-field
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'">
+                    <mat-label>About</mat-label>
+                    <textarea
+                        matInput
+                        [formControlName]="'about'"
+                        cdkTextareaAutosize
+                        [cdkAutosizeMinRows]="5"></textarea>
+                </mat-form-field>
+                <div class="mt-1 text-md text-hint">Brief description for your profile. Basic HTML and Emoji are allowed.</div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="my-10 border-t"></div>
+
+        <!-- Section -->
+        <div class="w-full">
+            <div class="text-xl">Personal Information</div>
+            <div class="text-secondary">Communication details in case we want to connect with you. These will be kept private.</div>
+        </div>
+        <div class="grid sm:grid-cols-4 gap-6 w-full mt-8">
+            <!-- Email -->
+            <div class="sm:col-span-2">
+                <mat-form-field
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'">
+                    <mat-label>Email</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:mail'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'email'"
+                        matInput>
+                </mat-form-field>
+            </div>
+            <!-- Phone -->
+            <div class="sm:col-span-2">
+                <mat-form-field
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'">
+                    <mat-label>Phone</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:phone'"
+                        matPrefix></mat-icon>
+                    <input
+                        [formControlName]="'numTel'"
+                        matInput>
+                </mat-form-field>
+                <mat-error *ngIf="accountForm.get('numTel').hasError('required')">Phone Number is required</mat-error>
+                <mat-error *ngIf="!accountForm.get('numTel').hasError('required')&&accountForm.get('numTel').hasError('invalidFormat')">Phone should contain only numbers</mat-error>
+                <mat-error *ngIf="!accountForm.get('numTel').hasError('required')&&!accountForm.get('numTel').hasError('invalidFormat')&&accountForm.get('numTel').hasError('invalidLength')">Phone should be exactly 8 digits long</mat-error>
+            </div>
+            <div  class="sm:col-span-4">
+                <mat-form-field
+                    class="w-full"
+                    [subscriptSizing]="'dynamic'">
+                    <mat-label>NCIN</mat-label>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:identification'"
+                        matPrefix></mat-icon>
+                    <input
+                        (input)="checkFieldExists('ncin')"
+                        [formControlName]="'ncin'"
+                        matInput>
+                </mat-form-field>
+                <mat-error *ngIf="accountForm.get('ncin').hasError('required')">NCIN is required</mat-error>
+                <mat-error *ngIf="!accountForm.get('ncin').hasError('required')&&accountForm.get('ncin').hasError('invalidFormat')">NCIN should contain only numbers</mat-error>
+                <mat-error *ngIf="!accountForm.get('ncin').hasError('required')&&!accountForm.get('ncin').hasError('invalidFormat')&&accountForm.get('ncin').hasError('invalidLength')">NCIN should be exactly 8 digits long</mat-error>
+                <mat-error *ngIf="accountForm.get('ncin').hasError('Exist')">NCIN already exists</mat-error>
+
+            </div>
+
+                        <!-- sexe -->
+                        <div class="sm:col-span-2">
+                            <mat-form-field
+                                class="w-full"
+                                [subscriptSizing]="'dynamic'">
+                                <mat-label>Sexe</mat-label>
+                                <mat-icon
+                                    class="icon-size-5"
+                                    [svgIcon]="'heroicons_outline:chevron-double-right'"
+                                    matPrefix></mat-icon>
+                                <mat-select [formControlName]="'sexe'">
+                                    <mat-option value="Male">Male</mat-option>
+                                <mat-option value="Female">Female</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="sm:col-span-2">
+                            <mat-label>Date Naissance</mat-label>
+                            <div 
+                            class="relative flex items-center mt-1.5 px-4 leading-9 rounded-full cursor-pointer text-on-primary-200 bg-primary-200 text-on-primary-300 "
+                            (click)="dateNaissance.open()"
+                        >
+                            <mat-icon
+                                class="icon-size-5 text-current"
+                                [svgIcon]="'heroicons_solid:calendar'"
+                            ></mat-icon>
+                            <span class="ml-2 text-md font-medium">
+                                <ng-container
+                                    *ngIf="
+                                        accountForm.get(
+                                            'dateNaissance'
+                                        ).value
+                                    "
+                                >
+                                    {{
+                                        accountForm.get(
+                                            "dateNaissance"
+                                        ).value | date : "longDate"
+                                    }}
+                                </ng-container>
+                                <ng-container
+                                    *ngIf="
+                                        !accountForm.get(
+                                            'dateNaissance'
+                                        ).value
+                                    "
+                                    >Not set</ng-container
+                                >
+                            </span>
+                            <mat-form-field
+                                class="fuse-mat-dense invisible absolute inset-0 -mt-2.5 opacity-0 pointer-events-none"
+                                [subscriptSizing]="'dynamic'"
+                            >
+                                <input
+                                    matInput
+                                    [formControlName]="'dateNaissance'"
+                                    [matDatepicker]="dateNaissance"
+                                    [max]="calculateMinDate()"
+                                />
+                                <mat-datepicker #dateNaissance>
+                                    <mat-datepicker-actions>
+                                        <button
+                                            mat-button
+                                            (click)="
+                                                accountForm
+                                                    .get(
+                                                        'dateNaissance'
+                                                    )
+                                                    .setValue(null)
+                                            "
+                                            matDatepickerCancel
+                                        >
+                                            Clear
+                                        </button>
+                                        <button
+                                            class=""
+                                            mat-flat-button
+                                            [color]="'primary'"
+                                            matDatepickerApply
+                                        >
+                                            Select
+                                        </button>
+                                    </mat-datepicker-actions>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        </div>
+            <!-- Country -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                    <mat-label>Country</mat-label>
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:location-marker'" matPrefix></mat-icon>
+                    <input [formControl]="accountForm.get('address').get('pays')" matInput>
+                </mat-form-field>
+                <mat-error *ngIf="accountForm.get('address.pays').hasError('required')">Country is required</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.pays').hasError('required')&&accountForm.get('address.pays').hasError('minlength')">Country should be at least 3 characters long</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.pays').hasError('required')&&!accountForm.get('address.pays').hasError('minlength')&&accountForm.get('address.pays').hasError('invalidFormat')">Invalid country name</mat-error>
+            </div>
+            <!-- City -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                    <mat-label>City</mat-label>
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:location-marker'" matPrefix></mat-icon>
+                    <input [formControl]="accountForm.get('address').get('ville')" matInput>
+                </mat-form-field>
+                <mat-error *ngIf="accountForm.get('address.ville').hasError('required')">City is required</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.ville').hasError('required')&&accountForm.get('address.ville').hasError('minlength')">City should be at least 3 characters long</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.ville').hasError('required')&&!accountForm.get('address.ville').hasError('minlength')&&accountForm.get('address.ville').hasError('invalidFormat')">Invalid country name</mat-error>
+            </div>
+            <!-- Street Number  -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                    <mat-label>Street Number</mat-label>
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:location-marker'" matPrefix></mat-icon>
+                    <input [formControl]="accountForm.get('address').get('numRue')" matInput>
+                </mat-form-field>
+                <mat-error *ngIf="accountForm.get('address.numRue').hasError('required')">Street number is required</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.numRue').hasError('required')&&accountForm.get('address.numRue').hasError('invalidLength')">Street number should be exactly 2 digits long</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.numRue').hasError('required')&&accountForm.get('address.numRue').hasError('invalidFormat')">Street number should contain only numbers</mat-error>
+            </div>
+            <!-- Postal Code  -->
+            <div class="sm:col-span-2">
+                <mat-form-field class="w-full" [subscriptSizing]="'dynamic'">
+                    <mat-label>Postal Code</mat-label>
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:location-marker'" matPrefix></mat-icon>
+                    <input [formControl]="accountForm.get('address').get('codePostale')" matInput>
+                </mat-form-field>
+                <mat-error *ngIf="accountForm.get('address.codePostale').hasError('required')">Postal code is required</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.codePostale').hasError('required')&&accountForm.get('address.codePostale').hasError('invalidFormat')">Postal code should contain only numbers</mat-error>
+                <mat-error *ngIf="!accountForm.get('address.codePostale').hasError('required')&&!accountForm.get('address.codePostale').hasError('invalidFormat')&&accountForm.get('address.codePostale').hasError('invalidLength')">Postal code should be exactly 4 digits long</mat-error>
+            </div>
+
+        </div>
+
+        <!-- Divider -->
+        <div class="mt-11 mb-10 border-t"></div>
+
+        <!-- Actions -->
+        <div class="flex items-center justify-end">
+            <button
+                (click)="intitForm()"
+                mat-stroked-button
+                type="button">
+                Cancel
+            </button>
+            <button
+                (click)="updateProfile()"
+                class="ml-4"
+                mat-flat-button
+                type="button"
+                [color]="'primary'"
+                >Save
+            </button>
+        </div>
+    </form>
+
+</div>
