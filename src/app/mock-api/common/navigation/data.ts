@@ -49,6 +49,13 @@ export var defaultNavigation: FuseNavigationItem[] = [
                 link : '/ChargeMetadta'
             },
             {
+                id   : 'act',
+                title: 'Acttivites',
+                type : 'basic',
+                icon : 'heroicons_outline:menu-alt-2',
+                link : '/Activites'
+            },
+            {
                 id   : 'apps.chat',
                 title: 'Statistics',
                 type : 'basic',

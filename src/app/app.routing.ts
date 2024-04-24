@@ -95,6 +95,7 @@ export const appRoutes: Route[] = [
             {path: 'profile', loadChildren: () => import('app/modules/profile/profile.module').then(m => m.ProfileModule)},
             
             {path: 'file-manager', loadChildren: () => import('app/modules/file-manager/file-manager.module').then(m => m.FileManagerModule)},
+            { path: 'Activites', loadChildren: () => import('app/modules/activities/activities.module').then(m => m.ActivitiesModule) },
 
             {path: 'AdvancedMetdata', loadChildren: () => import('app/modules/finance/finance.module').then(m => m.FinanceModule)},
             {path: 'ChargeMetadta', loadChildren: () => import('app/modules/crypto/crypto.module').then(m => m.CryptoModule)},
